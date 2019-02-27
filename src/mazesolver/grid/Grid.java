@@ -98,6 +98,22 @@ public class Grid {
         n.setType(Types.EMPTY);
     }
 
+    public void erase() {
+        for (Node n : nodes) {
+            n.setType(Types.EMPTY);
+        }
+    }
+
+    public void clear() {
+        for (Node n : nodes) {
+            Types t = n.getType();
+            if (t == Types.START || t == Types.END || t == Types.WALL) {
+                continue;
+            }
+            n.setType(Types.EMPTY);
+        }
+    }
+
     public Node getNode(int x, int y) {
         if (x < 0 || x >= cols || y < 0 || y >= rows) {
             return null;
