@@ -6,6 +6,7 @@
 package mazesolver.gui;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
@@ -14,7 +15,7 @@ import mazesolver.MazeSolver;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class GUI extends JPanel {
+public class GUI extends JPanel implements MouseListener {
 
     Grid grid;
     
@@ -23,9 +24,10 @@ public class GUI extends JPanel {
         
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
+        addMouseListener(this);
         
         // KOD TESTUJĄCY PRZESTAWAINIE ŚCIANEK I USTAWIANIE TYPÓW
-        
+        /*
         //Rysowanie paska przez środek planszy
         for(int i = 0; i < grid.getRows(); i++) {
             grid.toggleWall(grid.getCols()/2, i);
@@ -43,11 +45,37 @@ public class GUI extends JPanel {
         grid.setEnd(1, 1);
         grid.setEnd(1, 0);
         grid.setEnd(grid.getCols()-1, grid.getRows()-1);
+        */
         // KONIEC KODU TESTUJĄCEGO
     }
 
     @Override
     public void paint(Graphics g) {
         grid.draw(g);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent me) {
+        int x = (me.getX()) / MazeSolver.nodeSize;
+        int y = (me.getY()) / MazeSolver.nodeSize;
+                
+        grid.toggleWall(x, y);
+        this.repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
     }
 }

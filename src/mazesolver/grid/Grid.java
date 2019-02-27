@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashSet;
 import mazesolver.MazeSolver;
 import mazesolver.grid.Node.Type;
 
