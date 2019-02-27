@@ -74,9 +74,7 @@ public class Grid {
         int index = getIndex(x, y);
 
         Node n = nodes.get(index);
-        if (n.getType() != Type.END) {
-            n.setType(Type.START);
-        }
+        n.setType(Type.START);
     }
 
     public void setEnd(int x, int y) {
@@ -88,11 +86,9 @@ public class Grid {
         }
 
         int index = getIndex(x, y);
-        
+
         Node n = nodes.get(index);
-        if (n.getType() != Type.START) {
-            n.setType(Type.END);
-        }
+        n.setType(Type.END);
     }
 
     public void toggleWall(int x, int y) {
