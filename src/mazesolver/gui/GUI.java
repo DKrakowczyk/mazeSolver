@@ -78,6 +78,14 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         int x = me.getX();
         int y = me.getY();
 
+        // Return if mouse is over window
+        if (x < 0 || x >= MazeSolver.width) {
+            return;
+        }
+        if (y < 0 || y >= MazeSolver.height) {
+            return;
+        }        
+
         // Calculate velocity of mouse
         int vX = Math.abs(x - lastX);
         int vY = Math.abs(y - lastY);

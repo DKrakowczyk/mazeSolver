@@ -71,9 +71,7 @@ public class Grid {
             }
         }
 
-        int index = getIndex(x, y);
-
-        Node n = nodes.get(index);
+        Node n = getNode(x, y);
         n.setType(Type.START);
     }
 
@@ -85,16 +83,12 @@ public class Grid {
             }
         }
 
-        int index = getIndex(x, y);
-
-        Node n = nodes.get(index);
+        Node n = getNode(x, y);
         n.setType(Type.END);
     }
 
     public void toggleWall(int x, int y) {
-        int index = getIndex(x, y);
-
-        Node n = nodes.get(index);
+        Node n = getNode(x, y);
         switch (n.getType()) {
             case EMPTY:
                 n.setType(Type.WALL);
@@ -104,9 +98,13 @@ public class Grid {
                 break;
         }
     }
-
-    private int getIndex(int x, int y) {
-        return x + y * cols;
+    
+    public Node getNode(int x, int y) {
+        if(x < 0 || x >= cols || y < 0 || y >= rows) {
+            return null;
+        }
+        
+        return nodes.get(x + y * cols);
     }
 
 }
