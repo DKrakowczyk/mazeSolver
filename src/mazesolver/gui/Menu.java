@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  *
- * @author M.Kucharskov
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class Menu {
 
@@ -34,9 +34,24 @@ public class Menu {
             g.fillRect(20, 480, 260, 100);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.PLAIN, 16));
+            if(GUI.setStart){
+                g.setColor(new Color(7, 101, 238));
+            }
             g.drawString("Mouse + S key: set start", 30, 505);
+            g.setColor(Color.WHITE);
+            if(GUI.setEnd){
+                g.setColor(new Color(238, 29, 7));
+            }
             g.drawString("Mouse + E key: set end", 30, 525);
+            g.setColor(Color.WHITE);
+            if(GUI.mouseInUse){
+                g.setColor(new Color(238, 29, 7));
+            }
             g.drawString("Mouse left/right: add/remove walls", 30, 545);
+            g.setColor(Color.WHITE);
+            if(GUI.running){
+               g.setColor(new Color(106, 162, 244));
+            }
             g.drawString("Space: run/stop choosen algorithm", 30, 565);
         }
     }

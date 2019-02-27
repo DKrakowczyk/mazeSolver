@@ -17,7 +17,7 @@ import mazesolver.MazeSolver;
  */
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
-    private boolean setStart, setEnd;
+    static boolean setStart, setEnd, mouseInUse, running;
     private int lastX, lastY;
     private States state;
     Grid grid;
@@ -26,6 +26,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     public GUI() {
         this.setStart = false;
         this.setEnd = false;
+        mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
         this.state = States.DRAWING;
@@ -73,10 +74,14 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent me) {
+        mouseInUse = true;
+        repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
+        mouseInUse = false;
+        repaint();
     }
 
     @Override
@@ -119,7 +124,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 lastX = x;
                 lastY = y;
             }
-
+            
             this.repaint();
         }
     }
@@ -146,8 +151,9 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
-                    //setState(States.SEARHING);
-                    grid.clear();
+                    // setState(States.SEARHING);
+                    //grid.clear();
+                    running = !running;
                     repaint();
                     break;
             }
@@ -168,7 +174,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     setEnd = false;
                     repaint();
                     break;
-
             }
         }
 
