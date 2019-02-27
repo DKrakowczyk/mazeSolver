@@ -15,20 +15,24 @@ import mazesolver.MazeSolver;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class GUI extends JPanel implements MouseListener {
+public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
-    Grid grid;
     private boolean setStart, setEnd;
+    private int lastX, lastY;
+    Grid grid;
 
     public GUI() {
+        this.setStart = false;
+        this.setEnd = false;
+        this.lastX = -MazeSolver.nodeSize;
+        this.lastY = -MazeSolver.nodeSize;
         this.grid = new Grid();
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
         addMouseListener(this);
+        addMouseMotionListener(this);
         addKeyListener(new keyboardHandler());
-        setStart = false;
-        setEnd = false;
     }
 
     @Override
@@ -66,6 +70,29 @@ public class GUI extends JPanel implements MouseListener {
 
     @Override
     public void mouseExited(MouseEvent me) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        // Get te cursor position
+        int x = me.getX();
+        int y = me.getY();
+
+        //Calculate
+        int vX = Math.abs(x - lastX);
+        int vY = Math.abs(y - lastY);
+
+        if (vX >= MazeSolver.nodeSize || vY >= MazeSolver.nodeSize) {
+            grid.toggleWall(x / MazeSolver.nodeSize, y / MazeSolver.nodeSize);
+            this.repaint();
+
+            lastX = x;
+            lastY = y;
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent me) {
     }
 
     private class keyboardHandler implements KeyListener {
