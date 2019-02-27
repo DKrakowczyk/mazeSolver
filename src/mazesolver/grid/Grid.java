@@ -76,6 +76,15 @@ public class Grid {
         n.setType(Types.START);
     }
 
+    public Node getStart() {
+        for (Node n : nodes) {
+            if (n.getType() == Types.START) {
+                return n;
+            }
+        }
+        return null;
+    }
+
     public void setEnd(int x, int y) {
         // Remove old end
         for (Node n : nodes) {
@@ -86,6 +95,15 @@ public class Grid {
 
         Node n = getNode(x, y);
         n.setType(Types.END);
+    }
+
+    public Node getEnd() {
+        for (Node n : nodes) {
+            if (n.getType() == Types.END) {
+                return n;
+            }
+        }
+        return null;
     }
 
     public void setWall(int x, int y) {
@@ -122,25 +140,25 @@ public class Grid {
         return nodes.get(x + y * cols);
     }
 
-    public List<Node> getNeighbors(int x, int y, boolean diagonals) {
+    public List<Node> getNeighbors(int x, int y) {
         List<Node> result = new LinkedList<>();
 
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                // Continue if noighbor is me
-                if (i == 0 && j == 0) {
-                    continue;
-                }
-                // Continue if diagonals are disabled
-                if (diagonals == false && (Math.abs(i) - Math.abs(j) == 0)) {
-                    continue;
-                }
-
-                Node neighbor = getNode(x + i, y + j);
-                if (neighbor != null) {
-                    result.add(neighbor);
-                }
-            }
+        Node neighbor;
+        neighbor = getNode(x - 1, y);
+        if (neighbor != null) {
+            result.add(neighbor);
+        }
+        neighbor = getNode(x + 1, y);
+        if (neighbor != null) {
+            result.add(neighbor);
+        }
+        neighbor = getNode(x, y - 1);
+        if (neighbor != null) {
+            result.add(neighbor);
+        }
+        neighbor = getNode(x, y + 1);
+        if (neighbor != null) {
+            result.add(neighbor);
         }
 
         return result;

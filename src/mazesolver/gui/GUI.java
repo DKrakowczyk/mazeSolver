@@ -147,7 +147,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
                 case KeyEvent.VK_SPACE:
                     //setState(States.SEARHING);
-                    //Tu sie musi odpalić jakieś cudo, które zacznie lecieć od startu algorytmem i zmieniać w gridzie stany Nodów aż otrzyma rozwiązanie
+                    grid.clear();
                     repaint();
                     break;
             }

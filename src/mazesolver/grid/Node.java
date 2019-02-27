@@ -32,6 +32,14 @@ public class Node {
     public Types getType() {
         return this.type;
     }
+    
+    public int getX() {
+        return x;
+    }
+    
+    public int getY() {
+        return y;
+    }
 
     public void draw(Graphics g) {
         switch (type) {
@@ -46,9 +54,6 @@ public class Node {
                 break;
             case END:
                 g.setColor(new Color(238, 29, 7));
-                break;
-            case TOVISIT:
-                g.setColor(new Color(255, 255, 255));
                 break;
             case VISITED:
                 g.setColor(new Color(106, 162, 244));
