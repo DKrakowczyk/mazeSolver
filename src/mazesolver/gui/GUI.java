@@ -38,9 +38,9 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         addMouseMotionListener(this);
         addKeyListener(new keyboardHandler());
     }
-    
-    private enum States {
-        DRAWING, SEARHING
+
+    public void setState(States s) {
+        state = s;
     }
 
     @Override
@@ -51,22 +51,24 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        int x = (me.getX()) / MazeSolver.nodeSize;
-        int y = (me.getY()) / MazeSolver.nodeSize;
+        if (state == States.DRAWING) {
+            int x = (me.getX()) / MazeSolver.nodeSize;
+            int y = (me.getY()) / MazeSolver.nodeSize;
 
-        if (SwingUtilities.isLeftMouseButton(me)) {
-            if (setStart) {
-                grid.setStart(x, y);
-            } else if (setEnd) {
-                grid.setEnd(x, y);
-            } else {
-                grid.setWall(x, y);
+            if (SwingUtilities.isLeftMouseButton(me)) {
+                if (setStart) {
+                    grid.setStart(x, y);
+                } else if (setEnd) {
+                    grid.setEnd(x, y);
+                } else {
+                    grid.setWall(x, y);
+                }
+            } else if (SwingUtilities.isRightMouseButton(me)) {
+                grid.setEmpty(x, y);
             }
-        } else if (SwingUtilities.isRightMouseButton(me)) {
-            grid.setEmpty(x, y);
-        }
 
-        this.repaint();
+            this.repaint();
+        }
     }
 
     @Override
@@ -87,37 +89,39 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        // Get te cursor position
-        int x = (me.getX()) / MazeSolver.nodeSize;
-        int y = (me.getY()) / MazeSolver.nodeSize;
+        if (state == States.DRAWING) {
+            // Get te cursor position
+            int x = (me.getX()) / MazeSolver.nodeSize;
+            int y = (me.getY()) / MazeSolver.nodeSize;
 
-        // Return if mouse is over grid
-        if (me.getX() < 0 || x >= grid.getCols()) {
-            return;
-        }
-        if (me.getY() < 0 || y >= grid.getRows()) {
-            return;
-        }
-
-        // Calculate velocity of mouse
-        int vX = Math.abs(x - lastX);
-        int vY = Math.abs(y - lastY);
-
-        // If distance steps by 1 node
-        if (vX >= 1 || vY >= 1) {
-            if (SwingUtilities.isLeftMouseButton(me)) {
-                grid.setWall(x, y);
-            } else if (SwingUtilities.isRightMouseButton(me)) {
-                grid.setEmpty(x, y);
+            // Return if mouse is over grid
+            if (me.getX() < 0 || x >= grid.getCols()) {
+                return;
             }
+            if (me.getY() < 0 || y >= grid.getRows()) {
+                return;
+            }
+
+            // Calculate velocity of mouse
+            int vX = Math.abs(x - lastX);
+            int vY = Math.abs(y - lastY);
+
+            // If distance steps by 1 node
+            if (vX >= 1 || vY >= 1) {
+                if (SwingUtilities.isLeftMouseButton(me)) {
+                    grid.setWall(x, y);
+                } else if (SwingUtilities.isRightMouseButton(me)) {
+                    grid.setEmpty(x, y);
+                }
+                this.repaint();
+
+                //Update last position
+                lastX = x;
+                lastY = y;
+            }
+
             this.repaint();
-
-            //Update last position
-            lastX = x;
-            lastY = y;
         }
-
-        this.repaint();
     }
 
     @Override
@@ -142,6 +146,8 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
+                    //setState(States.SEARHING);
+                    //Tu sie musi odpalić jakieś cudo, które zacznie lecieć od startu algorytmem i zmieniać w gridzie stany Nodów aż otrzyma rozwiązanie
                     repaint();
                     break;
             }
@@ -166,6 +172,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
             }
         }
 
+    }
+
+    public static enum States {
+        DRAWING, SEARHING
     }
 
 }
