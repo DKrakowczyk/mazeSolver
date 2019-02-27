@@ -18,6 +18,7 @@ import mazesolver.MazeSolver;
 public class GUI extends JPanel implements MouseListener {
 
     Grid grid;
+    private boolean setStart, setEnd;
     
     public GUI() {
         this.grid = new Grid();
@@ -25,28 +26,9 @@ public class GUI extends JPanel implements MouseListener {
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
         addMouseListener(this);
-        
-        // KOD TESTUJĄCY PRZESTAWAINIE ŚCIANEK I USTAWIANIE TYPÓW
-        /*
-        //Rysowanie paska przez środek planszy
-        for(int i = 0; i < grid.getRows(); i++) {
-            grid.toggleWall(grid.getCols()/2, i);
-        }
-        //Powrotne togglowanie co drugiego
-        for(int i = 0; i < grid.getRows(); i += 2) {
-            grid.toggleWall(grid.getCols()/2, i);
-        }
-        
-        //Kilkukrotne ustawienie startu
-        grid.setStart(1, 1);
-        grid.setStart(1, 0);
-        grid.setStart(0, 0);
-        
-        grid.setEnd(1, 1);
-        grid.setEnd(1, 0);
-        grid.setEnd(grid.getCols()-1, grid.getRows()-1);
-        */
-        // KONIEC KODU TESTUJĄCEGO
+        addKeyListener(new keyboardHandler());
+        setStart = false;
+        setEnd = false;
     }
 
     @Override
@@ -58,8 +40,15 @@ public class GUI extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent me) {
         int x = (me.getX()) / MazeSolver.nodeSize;
         int y = (me.getY()) / MazeSolver.nodeSize;
-                
-        grid.toggleWall(x, y);
+
+        if (setStart) {
+            grid.setStart(x, y);
+        } else if (setEnd) {
+            grid.setEnd(x, y);
+        } else {
+            grid.toggleWall(x, y);
+        }
+
         this.repaint();
     }
 
@@ -78,4 +67,37 @@ public class GUI extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent me) {
     }
+    
+    private class keyboardHandler implements KeyListener {
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_S:
+                    setStart = true;
+                    break;
+                case KeyEvent.VK_E:
+                    setEnd = true;
+                    break;
+            }
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e) {}
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_S:
+                    setStart = false;
+                    break;
+                case KeyEvent.VK_E:
+                    setEnd = false;
+                    break;
+
+            }
+        }
+
+    }
+    
 }
