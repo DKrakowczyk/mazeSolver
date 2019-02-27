@@ -45,16 +45,16 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         int x = (me.getX()) / MazeSolver.nodeSize;
         int y = (me.getY()) / MazeSolver.nodeSize;
 
-        if (setStart) {
-            grid.setStart(x, y);
-        } else if (setEnd) {
-            grid.setEnd(x, y);
-        } else {
-            if (SwingUtilities.isLeftMouseButton(me)) {
+        if (SwingUtilities.isLeftMouseButton(me)) {
+            if (setStart) {
+                grid.setStart(x, y);
+            } else if (setEnd) {
+                grid.setEnd(x, y);
+            } else {
                 grid.setWall(x, y);
-            } else if (SwingUtilities.isRightMouseButton(me)) {
-                grid.setEmpty(x, y);
             }
+        } else if (SwingUtilities.isRightMouseButton(me)) {
+            grid.setEmpty(x, y);
         }
 
         this.repaint();
@@ -94,7 +94,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         int vX = Math.abs(x - lastX);
         int vY = Math.abs(y - lastY);
 
-        // If distance >= nodeSize
+        // If distance steps by 1 node
         if (vX >= 1 || vY >= 1) {
             if (SwingUtilities.isLeftMouseButton(me)) {
                 grid.setWall(x, y);
