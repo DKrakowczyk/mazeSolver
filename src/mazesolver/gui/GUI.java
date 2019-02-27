@@ -19,6 +19,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     private boolean setStart, setEnd;
     private int lastX, lastY;
+    private States state;
     Grid grid;
     Menu menu;
 
@@ -27,6 +28,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         this.setEnd = false;
         this.lastX = -1;
         this.lastY = -1;
+        this.state = States.DRAWING;
         this.grid = new Grid();
         this.menu = new Menu(0, 0);
 
@@ -35,6 +37,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(new keyboardHandler());
+    }
+    
+    private enum States {
+        DRAWING, SEARHING
     }
 
     @Override
