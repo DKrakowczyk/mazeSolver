@@ -152,21 +152,35 @@ public class Maze extends JPanel implements MouseListener {
                 case KeyEvent.VK_S:
                     placeStart = !placeStart;
                     placeEnd = false;
-                    System.out.println("Select start node");
+                    if(placeStart)
+                        System.out.println("Wlaczono wybieranie start node");
+                    else
+                        System.out.println("Wylaczono wybieranie start node");
                     break;
                 case KeyEvent.VK_E:
                     placeStart = false;
                     placeEnd = !placeEnd;
-                    System.out.println("Select end node");
+                    if(placeEnd)
+                        System.out.println("Wlaczono wybieranie end node");
+                    else
+                        System.out.println("Wylaczono wybieranie end node");
                     break;
                 case KeyEvent.VK_R:
                     if(!placeStart && !placeEnd){
                     removeWall = !removeWall;
                     placeWall = !placeWall;
+                    if(removeWall)
+                        System.out.println("Wlaczono usuwanie scian");
+                    else
+                        System.out.println("Wylaczono usuwanie scian");
                     }
                 case KeyEvent.VK_W:
                     if(!removeWall && !placeStart && !placeEnd) {
                         placeWall = true;
+                        if(placeWall)
+                        System.out.println("Wlaczono stawianie scian");
+                    else
+                        System.out.println("Wylaczono stawianie scian");
                     }
             }
         }
