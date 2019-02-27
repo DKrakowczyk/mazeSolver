@@ -17,19 +17,19 @@ public class Node {
 
     final int x;
     final int y;
-    Type type;
+    Types type;
 
     public Node(int x, int y) {
         this.x = x;
         this.y = y;
-        this.type = Type.EMPTY;
+        this.type = Types.EMPTY;
     }
 
-    public void setType(Type t) {
+    public void setType(Types t) {
         this.type = t;
     }
 
-    public Type getType() {
+    public Types getType() {
         return this.type;
     }
 
@@ -46,6 +46,15 @@ public class Node {
                 break;
             case END:
                 g.setColor(new Color(238, 29, 7));
+                break;
+            case TOVISIT:
+                g.setColor(new Color(255, 255, 255));
+                break;
+            case VISITED:
+                g.setColor(new Color(106, 162, 244));
+                break;
+            case SOLUTION:
+                g.setColor(new Color(60, 142, 4));
                 break;
         }
 
@@ -81,7 +90,7 @@ public class Node {
         return true;
     }
 
-    public static enum Type {
-        EMPTY, WALL, START, END
+    public static enum Types {
+        EMPTY, WALL, START, END, TOVISIT, VISITED, SOLUTION
     }
 }

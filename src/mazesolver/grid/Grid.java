@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import mazesolver.MazeSolver;
-import mazesolver.grid.Node.Type;
+import mazesolver.grid.Node.Types;
 
 /**
  *
@@ -67,35 +67,35 @@ public class Grid {
     public void setStart(int x, int y) {
         // Remove old start
         for (Node n : nodes) {
-            if (n.getType() == Type.START) {
-                n.setType(Type.EMPTY);
+            if (n.getType() == Types.START) {
+                n.setType(Types.EMPTY);
             }
         }
 
         Node n = getNode(x, y);
-        n.setType(Type.START);
+        n.setType(Types.START);
     }
 
     public void setEnd(int x, int y) {
         // Remove old end
         for (Node n : nodes) {
-            if (n.getType() == Type.END) {
-                n.setType(Type.EMPTY);
+            if (n.getType() == Types.END) {
+                n.setType(Types.EMPTY);
             }
         }
 
         Node n = getNode(x, y);
-        n.setType(Type.END);
+        n.setType(Types.END);
     }
 
     public void setWall(int x, int y) {
         Node n = getNode(x, y);
-        n.setType(Type.WALL);
+        n.setType(Types.WALL);
     }
 
     public void setEmpty(int x, int y) {
         Node n = getNode(x, y);
-        n.setType(Type.EMPTY);
+        n.setType(Types.EMPTY);
     }
 
     public Node getNode(int x, int y) {
