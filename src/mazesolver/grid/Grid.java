@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import mazesolver.MazeSolver;
 import mazesolver.grid.Node.Type;
 
@@ -86,23 +87,46 @@ public class Grid {
         Node n = getNode(x, y);
         n.setType(Type.END);
     }
-    
+
     public void setWall(int x, int y) {
         Node n = getNode(x, y);
         n.setType(Type.WALL);
     }
-    
+
     public void setEmpty(int x, int y) {
         Node n = getNode(x, y);
         n.setType(Type.EMPTY);
     }
-    
+
     public Node getNode(int x, int y) {
-        if(x < 0 || x >= cols || y < 0 || y >= rows) {
+        if (x < 0 || x >= cols || y < 0 || y >= rows) {
             return null;
         }
-        
+
         return nodes.get(x + y * cols);
     }
 
+    public List<Node> getNeighbors(int x, int y, boolean diagonals) {
+        List<Node> result = new LinkedList<>();
+
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                // Continue if noighbor is me
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                // Continue if diagonals are disabled
+                if (diagonals == false && (Math.abs(i) - Math.abs(j) == 0)) {
+                    continue;
+                }
+
+                Node neighbor = getNode(x + i, y + j);
+                if (neighbor != null) {
+                    result.add(neighbor);
+                }
+            }
+        }
+
+        return result;
+    }
 }
