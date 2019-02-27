@@ -50,9 +50,9 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         } else if (setEnd) {
             grid.setEnd(x, y);
         } else {
-            if (me.getButton() == MouseEvent.BUTTON1) {
+            if (SwingUtilities.isLeftMouseButton(me)) {
                 grid.setWall(x, y);
-            } else if (me.getButton() == MouseEvent.BUTTON3) {
+            } else if (SwingUtilities.isRightMouseButton(me)) {
                 grid.setEmpty(x, y);
             }
         }
@@ -96,7 +96,11 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
         // If distance >= nodeSize
         if (vX >= 1 || vY >= 1) {
-            grid.setWall(x, y);
+            if (SwingUtilities.isLeftMouseButton(me)) {
+                grid.setWall(x, y);
+            } else if (SwingUtilities.isRightMouseButton(me)) {
+                grid.setEmpty(x, y);
+            }
             this.repaint();
 
             //Update last position
