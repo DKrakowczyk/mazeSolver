@@ -86,17 +86,15 @@ public class Grid {
         Node n = getNode(x, y);
         n.setType(Type.END);
     }
-
-    public void toggleWall(int x, int y) {
+    
+    public void setWall(int x, int y) {
         Node n = getNode(x, y);
-        switch (n.getType()) {
-            case EMPTY:
-                n.setType(Type.WALL);
-                break;
-            case WALL:
-                n.setType(Type.EMPTY);
-                break;
-        }
+        n.setType(Type.WALL);
+    }
+    
+    public void setEmpty(int x, int y) {
+        Node n = getNode(x, y);
+        n.setType(Type.EMPTY);
     }
     
     public Node getNode(int x, int y) {

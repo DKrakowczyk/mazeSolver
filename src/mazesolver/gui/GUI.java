@@ -24,8 +24,8 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     public GUI() {
         this.setStart = false;
         this.setEnd = false;
-        this.lastX = -MazeSolver.nodeSize;
-        this.lastY = -MazeSolver.nodeSize;
+        this.lastX = -1;
+        this.lastY = -1;
         this.grid = new Grid();
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
@@ -50,7 +50,11 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         } else if (setEnd) {
             grid.setEnd(x, y);
         } else {
-            grid.toggleWall(x, y);
+            if (me.getButton() == MouseEvent.BUTTON1) {
+                grid.setWall(x, y);
+            } else if (me.getButton() == MouseEvent.BUTTON3) {
+                grid.setEmpty(x, y);
+            }
         }
 
         this.repaint();
@@ -75,25 +79,24 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent me) {
         // Get te cursor position
-        int x = me.getX();
-        int y = me.getY();
+        int x = (me.getX()) / MazeSolver.nodeSize;
+        int y = (me.getY()) / MazeSolver.nodeSize;
 
-        // Return if mouse is over window
-        if (x < 0 || x >= MazeSolver.width) {
+        // Return if mouse is over grid
+        if (me.getX() < 0 || x >= grid.getCols()) {
             return;
         }
-        if (y < 0 || y >= MazeSolver.height) {
+        if (me.getY() < 0 || y >= grid.getRows()) {
             return;
-        }        
+        }
 
         // Calculate velocity of mouse
         int vX = Math.abs(x - lastX);
         int vY = Math.abs(y - lastY);
 
-        // If velocity >= nodeSize
-        if (vX >= MazeSolver.nodeSize || vY >= MazeSolver.nodeSize) {
-            //Toggle wall
-            grid.toggleWall(x / MazeSolver.nodeSize, y / MazeSolver.nodeSize);
+        // If distance >= nodeSize
+        if (vX >= 1 || vY >= 1) {
+            grid.setWall(x, y);
             this.repaint();
 
             //Update last position
