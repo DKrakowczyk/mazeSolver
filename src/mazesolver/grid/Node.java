@@ -39,7 +39,7 @@ public class Node {
                 g.setColor(new Color(70, 78, 91));
                 break;
             case WALL:
-                g.setColor(new Color(255, 255, 255));
+                g.setColor(new Color(0, 0, 0));
                 break;
             case START:
                 g.setColor(new Color(7, 101, 238));
