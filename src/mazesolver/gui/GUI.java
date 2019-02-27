@@ -78,14 +78,17 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         int x = me.getX();
         int y = me.getY();
 
-        //Calculate
+        // Calculate velocity of mouse
         int vX = Math.abs(x - lastX);
         int vY = Math.abs(y - lastY);
 
+        // If velocity >= nodeSize
         if (vX >= MazeSolver.nodeSize || vY >= MazeSolver.nodeSize) {
+            //Toggle wall
             grid.toggleWall(x / MazeSolver.nodeSize, y / MazeSolver.nodeSize);
             this.repaint();
 
+            //Update last position
             lastX = x;
             lastY = y;
         }
