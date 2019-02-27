@@ -19,10 +19,10 @@ public class GUI extends JPanel implements MouseListener {
 
     Grid grid;
     private boolean setStart, setEnd;
-    
+
     public GUI() {
         this.grid = new Grid();
-        
+
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
         addMouseListener(this);
@@ -67,7 +67,7 @@ public class GUI extends JPanel implements MouseListener {
     @Override
     public void mouseExited(MouseEvent me) {
     }
-    
+
     private class keyboardHandler implements KeyListener {
 
         @Override
@@ -83,7 +83,8 @@ public class GUI extends JPanel implements MouseListener {
         }
 
         @Override
-        public void keyTyped(KeyEvent e) {}
+        public void keyTyped(KeyEvent e) {
+        }
 
         @Override
         public void keyReleased(KeyEvent e) {
@@ -99,5 +100,5 @@ public class GUI extends JPanel implements MouseListener {
         }
 
     }
-    
+
 }
