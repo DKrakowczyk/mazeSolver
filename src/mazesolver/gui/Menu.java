@@ -33,26 +33,29 @@ public class Menu {
         } else {
             // Draw bigger box with text and data
             g.setColor(new Color(41, 43, 45, 160));
-            g.fillRect(20, 440, 260, 120);
+            g.fillRect(20, 420, 260, 140);
             
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.PLAIN, 16));
             if(GUI.mouseInUse){
                 g.setColor(new Color(61, 201, 7));
             }
-            g.drawString("Mouse: add/remove walls", 30, 465);
+            g.drawString("Mouse: add/remove walls", 30, 445);
             
             g.setColor(Color.WHITE);
             if(GUI.setStart){
                 g.setColor(new Color(7, 101, 238));
             }
-            g.drawString("Mouse + S key: set start", 30, 485);
+            g.drawString("Mouse + S key: set start", 30, 465);
             
             g.setColor(Color.WHITE);
             if(GUI.setEnd){
                 g.setColor(new Color(238, 29, 7));
             }
-            g.drawString("Mouse + E key: set end", 30, 505);
+            g.drawString("Mouse + E key: set end", 30, 485);
+            
+            g.setColor(Color.WHITE);
+            g.drawString("C key: clear the grid", 30, 510);
             
             g.setColor(Color.WHITE);
             g.drawString("R key: generate random maze", 30, 530);
