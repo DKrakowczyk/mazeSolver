@@ -10,7 +10,7 @@ import mazesolver.grid.Node;
 
 /**
  *
- * @author M.Kucharskov
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class Generator {
 
