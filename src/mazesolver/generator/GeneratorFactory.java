@@ -5,17 +5,19 @@
  */
 package mazesolver.generator;
 
+import mazesolver.grid.Grid;
+
 /**
  *
  * @author DKrakowczyk & M. Kucharskov
  */
 public class GeneratorFactory {
 
-    public static IGenerator getGenerator(int id) {
+    public static IGenerator getGenerator(Grid grid, int id) {
 
         switch (id) {
             case 1:
-                return new NoiseGenerator();
+                return new NoiseGenerator(grid);
             default:
                 return null;
         }
