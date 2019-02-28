@@ -11,6 +11,7 @@ import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
+import mazesolver.solver.SolverFactory;
 
 /**
  *
@@ -158,6 +159,11 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
                 case KeyEvent.VK_SPACE:
                     running = !running;
+                    if(SolverFactory.getSolver(grid, 1).solve()) {
+                        System.out.println("Rozwiązano");
+                    } else {
+                        System.out.println("Brak rozwiązania");
+                    }
                     repaint();
                     break;
             }
