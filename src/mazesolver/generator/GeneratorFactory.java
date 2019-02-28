@@ -18,6 +18,8 @@ public class GeneratorFactory {
         switch (id) {
             case 1:
                 return new NoiseGenerator(grid);
+            case 2:
+                return new BacktrackGenerator(grid);
             default:
                 return null;
         }
