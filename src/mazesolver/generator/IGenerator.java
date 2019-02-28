@@ -12,5 +12,5 @@ import mazesolver.grid.Grid;
  * @author DKrakowczyk & M. Kucharskov
  */
 public interface IGenerator {
-    public void generate(Grid grid);
+    public void generate();
 }

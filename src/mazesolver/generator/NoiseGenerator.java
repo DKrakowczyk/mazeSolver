@@ -13,19 +13,17 @@ import mazesolver.grid.Node;
  * @author DKrakowczyk & M. Kucharskov
  */
 public class NoiseGenerator implements IGenerator {
+    
+    Grid grid;
+    double noise;
 
-    double noise = 0.3;
-
-    public void setNoise(double noise) {
-        if (noise < 0 || noise > 1) {
-            return;
-        }
-
-        this.noise = noise;
+    public NoiseGenerator(Grid grid) {
+        this.grid = grid;
+        this.noise = 0.3;
     }
 
     @Override
-    public void generate(Grid grid) {
+    public void generate() {
         int rows = grid.getRows();
         int cols = grid.getCols();
 
