@@ -42,6 +42,7 @@ public class Node {
     }
 
     public void draw(Graphics g) {
+        // Set propely color
         switch (type) {
             case EMPTY:
                 g.setColor(new Color(70, 78, 91));
@@ -63,6 +64,7 @@ public class Node {
                 break;
         }
 
+        // Draw square with nodeSize size
         g.fillRect(x * MazeSolver.nodeSize, y * MazeSolver.nodeSize, MazeSolver.nodeSize, MazeSolver.nodeSize);
     }
 
@@ -95,6 +97,7 @@ public class Node {
         return true;
     }
 
+    // Enum to recognize nude by program (color for human)
     public static enum Types {
         EMPTY, WALL, START, END, TOVISIT, VISITED, SOLUTION
     }

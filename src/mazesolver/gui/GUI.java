@@ -138,6 +138,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
         @Override
         public void keyPressed(KeyEvent e) {
+            // If user press key
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_S:
                     setStart = true;
@@ -156,8 +157,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
-                    // setState(States.SEARHING);
-                    //grid.clear();
                     running = !running;
                     repaint();
                     break;
@@ -184,6 +183,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     }
 
+    // Enum to recognize corect gui state
     public static enum States {
         DRAWING, SEARHING
     }

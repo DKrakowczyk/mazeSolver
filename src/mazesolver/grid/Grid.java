@@ -72,16 +72,19 @@ public class Grid {
             }
         }
 
+        // Set type of node to start
         Node n = getNode(x, y);
         n.setType(Types.START);
     }
 
     public Node getStart() {
         for (Node n : nodes) {
+            // Find start and return that node
             if (n.getType() == Types.START) {
                 return n;
             }
         }
+        // Else return null
         return null;
     }
 
@@ -93,16 +96,19 @@ public class Grid {
             }
         }
 
+        // Set type of node to end
         Node n = getNode(x, y);
         n.setType(Types.END);
     }
 
     public Node getEnd() {
         for (Node n : nodes) {
+            // Find end and return that node
             if (n.getType() == Types.END) {
                 return n;
             }
         }
+        // Else return null
         return null;
     }
 
@@ -117,14 +123,18 @@ public class Grid {
     }
 
     public void erase() {
+        // Set all nodes to empty
         for (Node n : nodes) {
             n.setType(Types.EMPTY);
         }
     }
 
     public void clear() {
+        // Set all nodes to empty
         for (Node n : nodes) {
             Types t = n.getType();
+            // But skip: start, end and wall
+            // Usefull to clear solution 
             if (t == Types.START || t == Types.END || t == Types.WALL) {
                 continue;
             }
@@ -133,25 +143,32 @@ public class Grid {
     }
 
     public Node getNode(int x, int y) {
+        // Check coords if theyre wrong return null
         if (x < 0 || x >= cols || y < 0 || y >= rows) {
             return null;
         }
 
+        // Else return propely node
         return nodes.get(x + y * cols);
     }
 
     public List<Node> getNeighbors(int x, int y) {
+        // List for neighbours
         List<Node> result = new LinkedList<>();
 
         Node neighbor;
+        // Check in X axis
         for (int xoff = -1; xoff < 2; xoff += 2) {
             neighbor = getNode(x + xoff, y);
+            // Skip walls
             if (neighbor != null && neighbor.getType() != Types.WALL) {
                 result.add(neighbor);
             }
         }
+        // Check in Y axis
         for (int yoff = -1; yoff < 2; yoff += 2) {
             neighbor = getNode(x, y + yoff);
+            // Skip walls
             if (neighbor != null && neighbor.getType() != Types.WALL) {
                 result.add(neighbor);
             }

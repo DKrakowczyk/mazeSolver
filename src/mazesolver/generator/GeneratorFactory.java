@@ -14,11 +14,13 @@ import mazesolver.grid.Grid;
 public class GeneratorFactory {
 
     public static IGenerator getGenerator(Grid grid, int id) {
-
+        // Return a generator depending on the id
         switch (id) {
             case 1:
+                // Simple noise generator based on Math.random()
                 return new NoiseGenerator(grid);
             case 2:
+                // Amazing maze generator with backtrack algorithm
                 return new BacktrackGenerator(grid);
             default:
                 return null;

@@ -24,12 +24,14 @@ public class Menu {
 
     public void draw(Graphics g) {
         if (hidden) {
+            // Draw small square with "M"
             g.setColor(new Color(41, 43, 45, 160));
             g.fillRect(20, 520, 40, 40);
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.PLAIN, 16));
             g.drawString("(M)", 29, 545);
         } else {
+            // Draw bigger box with text and data
             g.setColor(new Color(41, 43, 45, 160));
             g.fillRect(20, 440, 260, 120);
             

@@ -10,6 +10,7 @@ import javax.swing.*;
  */
 public class MazeSolver extends JFrame {
 
+    // Static dimension of maze
     public static final int height = 580;
     public static final int width = 900;
     public static final int nodeSize = 20;
@@ -20,6 +21,7 @@ public class MazeSolver extends JFrame {
         setResizable(false);
         setLayout(new GridLayout(1, 1, 0, 0));
 
+        // Add GUI to Frame
         GUI gui = new GUI();
         
         add(gui);
