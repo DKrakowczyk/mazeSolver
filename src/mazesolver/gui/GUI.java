@@ -158,11 +158,13 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_R:
+                    //Need refractor here
                     GeneratorFactory.getGenerator(grid, 2).generate();
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
                     running = !running;
+                    //Need refractor here
                     if(SolverFactory.getSolver(grid, 1).solve()) {
                         System.out.println("Rozwiązano");
                     } else {
