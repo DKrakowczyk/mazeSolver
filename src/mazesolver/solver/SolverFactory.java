@@ -14,6 +14,12 @@ import mazesolver.grid.Grid;
 public class SolverFactory {
 
     public static ISolver getSolver(Grid grid, int id) {
+        // Return a solver depending on the id
+        switch (id) {
+            case 1:
+                return new AcrossSolver(grid);
+            case 2:
+                return new DeepSolver(grid);
             default:
                 return null;
         }
