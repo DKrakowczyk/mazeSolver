@@ -10,6 +10,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
+import mazesolver.generator.GeneratorFactory;
 
 /**
  *
@@ -148,6 +149,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
                 case KeyEvent.VK_M:
                     menu.toggle();
+                    repaint();
+                    break;
+                case KeyEvent.VK_R:
+                    GeneratorFactory.getGenerator(1).generate(grid);
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
