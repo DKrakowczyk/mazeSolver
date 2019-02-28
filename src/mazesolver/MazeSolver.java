@@ -10,7 +10,7 @@ import javax.swing.*;
  */
 public class MazeSolver extends JFrame {
 
-    public static final int height = 600;
+    public static final int height = 580;
     public static final int width = 900;
     public static final int nodeSize = 20;
     
