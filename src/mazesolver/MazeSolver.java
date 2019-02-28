@@ -24,6 +24,7 @@ public class MazeSolver extends JFrame {
         
         add(gui);
         pack(); 
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
