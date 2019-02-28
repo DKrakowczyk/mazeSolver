@@ -144,21 +144,17 @@ public class Grid {
         List<Node> result = new LinkedList<>();
 
         Node neighbor;
-        neighbor = getNode(x - 1, y);
-        if (neighbor != null) {
-            result.add(neighbor);
+        for (int xoff = -1; xoff < 2; xoff += 2) {
+            neighbor = getNode(x + xoff, y);
+            if (neighbor != null && neighbor.getType() != Types.WALL) {
+                result.add(neighbor);
+            }
         }
-        neighbor = getNode(x + 1, y);
-        if (neighbor != null) {
-            result.add(neighbor);
-        }
-        neighbor = getNode(x, y - 1);
-        if (neighbor != null) {
-            result.add(neighbor);
-        }
-        neighbor = getNode(x, y + 1);
-        if (neighbor != null) {
-            result.add(neighbor);
+        for (int yoff = -1; yoff < 2; yoff += 2) {
+            neighbor = getNode(x, y + yoff);
+            if (neighbor != null && neighbor.getType() != Types.WALL) {
+                result.add(neighbor);
+            }
         }
 
         return result;
