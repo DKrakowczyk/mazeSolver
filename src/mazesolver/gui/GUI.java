@@ -156,7 +156,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 case KeyEvent.VK_R:
                     IGenerator generator = GeneratorFactory.getGenerator(grid);
                     generator.generate();
-
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
