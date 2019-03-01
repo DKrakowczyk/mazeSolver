@@ -12,6 +12,7 @@ import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
 import mazesolver.generator.IGenerator;
+import mazesolver.solver.SolverFactory;
 
 /**
  *
@@ -70,8 +71,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent me) {
-        mouseInUse = true;
-        repaint();
+        if (!running) {
+            mouseInUse = true;
+            repaint();
+        }
     }
 
     @Override
@@ -135,29 +138,63 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         public void keyPressed(KeyEvent e) {
             // If user press key
             switch (e.getKeyCode()) {
+                // Start placing
                 case KeyEvent.VK_S:
-                    setStart = true;
-                    repaint();
+                    if (!running) {
+                        setStart = true;
+                        repaint();
+                    }
                     break;
+                // End placing
                 case KeyEvent.VK_E:
-                    setEnd = true;
-                    repaint();
+                    if (!running) {
+                        setEnd = true;
+                        repaint();
+                    }
                     break;
+                // Menu toggling
                 case KeyEvent.VK_M:
                     menu.toggle();
                     repaint();
                     break;
+                // Grid clearing
                 case KeyEvent.VK_C:
-                    grid.erase();
-                    repaint();
+                    if (!running) {
+                        grid.erase();
+                        repaint();
+                    }
                     break;
+                // Maze randomizing
                 case KeyEvent.VK_R:
-                    IGenerator generator = GeneratorFactory.getGenerator(grid);
-                    generator.generate();
-                    repaint();
+                    if (!running) {
+                        IGenerator generator = GeneratorFactory.getGenerator(grid);
+                        generator.generate();
+                        repaint();
+                    }
                     break;
+                // Solver run/stop
                 case KeyEvent.VK_SPACE:
                     running = !running;
+                    break;
+
+                // Solver choose
+                case KeyEvent.VK_1:
+                    if (!running) {
+                        SolverFactory.setID(1);
+                        repaint();
+                    }
+                    break;
+                case KeyEvent.VK_2:
+                    if (!running) {
+                        SolverFactory.setID(2);
+                        repaint();
+                    }
+                    break;
+                case KeyEvent.VK_3:
+                    if (!running) {
+                        SolverFactory.setID(3);
+                        repaint();
+                    }
                     break;
             }
         }

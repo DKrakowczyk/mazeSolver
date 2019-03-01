@@ -12,7 +12,15 @@ package mazesolver.solver;
 public class SolverFactory {
 
     private static int id = 1;
-    
+
+    public static int getID() {
+        return id;
+    }
+
+    public static void setID(int id) {
+        SolverFactory.id = id;
+    }
+
     public static ISolver getSolver() {
         switch (SolverFactory.id) {
             default:
