@@ -5,11 +5,21 @@
  */
 package mazesolver.solver;
 
+import java.util.Map;
+import mazesolver.grid.Grid;
+import mazesolver.grid.Node;
+
 /**
  *
  * @author DKrakowczyk & M. Kucharskov
  */
 public interface ISolver {
-    // Method which solve a maze
-    public boolean solve();
+    
+    public boolean setGrid(Grid grid);
+    
+    public boolean isDone();
+
+    public void doStep();
+
+    public Map<Node, Node> getSolution();
 }

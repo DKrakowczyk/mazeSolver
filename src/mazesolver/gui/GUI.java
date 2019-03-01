@@ -7,10 +7,15 @@ package mazesolver.gui;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Map;
 import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
+import mazesolver.generator.IGenerator;
+import mazesolver.grid.Node;
+import mazesolver.grid.Node.Types;
+import mazesolver.solver.ISolver;
 import mazesolver.solver.SolverFactory;
 
 /**
@@ -21,9 +26,9 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     static boolean setStart, setEnd, mouseInUse, running;
     private int lastX, lastY;
-    private States state;
     Grid grid;
     Menu menu;
+    Visualizer v;
 
     public GUI() {
         this.setStart = false;
@@ -31,19 +36,15 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
-        this.state = States.DRAWING;
         this.grid = new Grid();
         this.menu = new Menu(0, 0);
+                    this.v = new Visualizer(this);
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
         addMouseListener(this);
         addMouseMotionListener(this);
         addKeyListener(new keyboardHandler());
-    }
-
-    public void setState(States s) {
-        state = s;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (state == States.DRAWING) {
+        if (!running) {
             int x = (me.getX()) / MazeSolver.nodeSize;
             int y = (me.getY()) / MazeSolver.nodeSize;
 
@@ -96,7 +97,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        if (state == States.DRAWING) {
+        if (!running) {
             // Get te cursor position
             int x = (me.getX()) / MazeSolver.nodeSize;
             int y = (me.getY()) / MazeSolver.nodeSize;
@@ -126,7 +127,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 lastX = x;
                 lastY = y;
             }
-            
+
             this.repaint();
         }
     }
@@ -158,19 +159,17 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_R:
-                    //Need refractor here
-                    GeneratorFactory.getGenerator(grid, 2).generate();
+                    IGenerator generator = GeneratorFactory.getGenerator(grid);
+                    generator.generate();
+
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
-                    running = !running;
-                    //Need refractor here
-                    if(SolverFactory.getSolver(grid, 1).solve()) {
-                        System.out.println("Rozwiązano");
-                    } else {
-                        System.out.println("Brak rozwiązania");
-                    }
-                    repaint();
+                    
+                    running = true;
+                    Thread t = new Thread(v);
+                    t.start();
+                    
                     break;
             }
         }
@@ -193,11 +192,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
             }
         }
 
-    }
-
-    // Enum to recognize corect gui state
-    public static enum States {
-        DRAWING, SEARHING
     }
 
 }

@@ -13,11 +13,12 @@ import mazesolver.grid.Grid;
  */
 public class SolverFactory {
 
-    public static ISolver getSolver(Grid grid, int id) {
-        // Return a solver depending on the id
-        switch (id) {
+    private static int id = 1;
+    
+    public static ISolver getSolver() {
+        switch (SolverFactory.id) {
             case 1:
-                return new AcrossSolver(grid);
+                return new SimpleSolver();
             default:
                 return null;
         }

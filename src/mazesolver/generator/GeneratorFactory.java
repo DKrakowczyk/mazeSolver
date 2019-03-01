@@ -13,9 +13,11 @@ import mazesolver.grid.Grid;
  */
 public class GeneratorFactory {
 
-    public static IGenerator getGenerator(Grid grid, int id) {
+    private static int id = 2;
+    
+    public static IGenerator getGenerator(Grid grid) {
         // Return a generator depending on the id
-        switch (id) {
+        switch (GeneratorFactory.id) {
             case 1:
                 // Simple noise generator based on Math.random()
                 return new NoiseGenerator(grid);
