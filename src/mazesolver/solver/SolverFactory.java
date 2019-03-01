@@ -5,8 +5,6 @@
  */
 package mazesolver.solver;
 
-import mazesolver.grid.Grid;
-
 /**
  *
  * @author DKrakowczyk & M. Kucharskov

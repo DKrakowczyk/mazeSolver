@@ -7,16 +7,11 @@ package mazesolver.gui;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Map;
 import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
 import mazesolver.generator.IGenerator;
-import mazesolver.grid.Node;
-import mazesolver.grid.Node.Types;
-import mazesolver.solver.ISolver;
-import mazesolver.solver.SolverFactory;
 
 /**
  *
