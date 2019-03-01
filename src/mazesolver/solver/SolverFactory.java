@@ -15,8 +15,6 @@ public class SolverFactory {
     
     public static ISolver getSolver() {
         switch (SolverFactory.id) {
-            case 1:
-                return new SimpleSolver();
             default:
                 return null;
         }

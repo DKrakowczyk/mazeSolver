@@ -23,7 +23,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     private int lastX, lastY;
     Grid grid;
     Menu menu;
-    Visualizer v;
 
     public GUI() {
         this.setStart = false;
@@ -33,7 +32,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         this.lastY = -1;
         this.grid = new Grid();
         this.menu = new Menu(0, 0);
-                    this.v = new Visualizer(this);
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
@@ -159,11 +157,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     repaint();
                     break;
                 case KeyEvent.VK_SPACE:
-                    
-                    running = true;
-                    Thread t = new Thread(v);
-                    t.start();
-                    
+                    running = !running;
                     break;
             }
         }
