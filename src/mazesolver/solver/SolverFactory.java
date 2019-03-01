@@ -18,8 +18,6 @@ public class SolverFactory {
         switch (id) {
             case 1:
                 return new AcrossSolver(grid);
-            case 2:
-                return new DeepSolver(grid);
             default:
                 return null;
         }
