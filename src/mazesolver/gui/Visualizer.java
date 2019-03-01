@@ -8,14 +8,13 @@ package mazesolver.gui;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.solver.ISolver;
 import mazesolver.solver.SolverFactory;
 
 /**
  *
- * @author M.Kucharskov
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class Visualizer implements Runnable {
 
