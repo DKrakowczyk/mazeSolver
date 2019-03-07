@@ -5,11 +5,10 @@
  */
 package mazesolver.solver;
 
-
 /**
  *
  * @author DKrakowczyk & M. Kucharskov
  */
 public interface ISolver {
-    // We should start with correct interface to animate step by step solving
+    //
 }

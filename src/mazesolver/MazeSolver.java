@@ -3,6 +3,8 @@ package mazesolver;
 import mazesolver.gui.GUI;
 import java.awt.*;
 import javax.swing.*;
+import mazesolver.gui.ComLayer;
+import mazesolver.gui.Worker;
 
 /**
  *
@@ -15,22 +17,27 @@ public class MazeSolver extends JFrame {
     public static final int width = 900;
     public static final int nodeSize = 20;
     
-    public MazeSolver() {
+    public MazeSolver() throws InterruptedException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Maze Solver");
         setResizable(false);
         setLayout(new GridLayout(1, 1, 0, 0));
 
         // Add GUI to Frame
-        GUI gui = new GUI();
+        ComLayer cm = new ComLayer();
+        GUI gui = new GUI(cm);
+        Worker w = new Worker(cm);     
         
         add(gui);
         pack(); 
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        w.start();
+        w.join();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new MazeSolver();
     }
 

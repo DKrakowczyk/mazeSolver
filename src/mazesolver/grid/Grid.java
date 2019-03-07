@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import mazesolver.MazeSolver;
 import mazesolver.grid.Node.Types;
+import mazesolver.gui.GUI;
 
 /**
  *
@@ -21,12 +22,14 @@ public class Grid {
 
     final int rows;
     final int cols;
+    GUI g;
     List<Node> nodes;
 
-    public Grid() {
+    public Grid(GUI g) {
         // Calculating dimension of grid
         this.rows = MazeSolver.height / MazeSolver.nodeSize;
         this.cols = MazeSolver.width / MazeSolver.nodeSize;
+        this.g = g;
         this.nodes = new ArrayList<>();
 
         // Creating nodes (default type EMPTY)
@@ -54,6 +57,10 @@ public class Grid {
         for (int i = 1; i < rows; i++) {
             g.drawLine(0, i * MazeSolver.nodeSize, MazeSolver.width, i * MazeSolver.nodeSize);
         }
+    }
+    
+    public void repaint() {
+        g.repaint();
     }
 
     public int getRows() {

@@ -5,6 +5,7 @@
  */
 package mazesolver.gui;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -24,15 +25,17 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     private int lastX, lastY;
     Grid grid;
     Menu menu;
+    GUICom cl;
 
-    public GUI() {
+    public GUI(ComLayer cl) {
         this.setStart = false;
         this.setEnd = false;
         mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
-        this.grid = new Grid();
+        this.grid = new Grid(this);
         this.menu = new Menu(0, 0);
+        this.cl = cl;
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
@@ -175,6 +178,16 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 // Solver run/stop
                 case KeyEvent.VK_SPACE:
                     running = !running;
+
+                    if (running) {
+                        System.out.println("start");
+                        cl.setGrid(grid);
+                        cl.setStart(true);
+                    } else {
+                        System.out.println("stop");
+                        cl.setStopAlgo(true);
+                    }
+
                     break;
 
                 // Solver choose
