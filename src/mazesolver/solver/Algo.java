@@ -19,11 +19,11 @@ public class Algo {
     Grid grid;
     WorkerCom cm;
 
-    public Grid getGerid() {
+    public Grid getGrid() {
         return grid;
     }
 
-    public void setGerid(Grid gerid) {
+    public void setGrid(Grid gerid) {
         this.grid = gerid;
     }
 

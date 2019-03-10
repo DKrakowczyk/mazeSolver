@@ -12,34 +12,31 @@ import mazesolver.solver.Algo;
 
 /**
  *
- * @author Marcin
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class Worker extends Thread {
 
-    WorkerCom cm;
+    WorkerCom worker;
 
-    public Worker(WorkerCom cm) {
-        this.cm = cm;
+    public Worker(WorkerCom worker) {
+        this.worker = worker;
     }
 
     @Override
     public void run() {
         try {
             do {
-                System.out.println("Worker: Czeka");
-                cm.start();
-                if (cm.isStopWorker()) break;
-                System.out.println("Worker: Pobiera dane do algorytmu");
-                Grid grid = cm.getGrid();
+                worker.start(); // Uruchomienie workera
+                if (worker.isStopWorker()) {
+                    break;
+                }
+                Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
                 Algo alg = new Algo();
-                alg.setCm(cm);
-                alg.setGerid(grid);
-                System.out.println("Worker: Odpala algorytm");
+                alg.setCm(worker);
+                alg.setGrid(grid);
                 alg.start();
-                System.out.println("Worker: Koniec algorytmu");
-                cm.finished();
-            } while (!cm.isStopWorker());
-            System.out.println("Worker: Wyłączenie workera");
+                worker.finished(); // Zakonczenie dzialania algorytmu
+            } while (!worker.isStopWorker());
         } catch (InterruptedException ex) {
             Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
         }
