@@ -11,8 +11,18 @@ package mazesolver.alghoritms;
  */
 public class AlgorithmFactory {
 
-    public static ISolver getAlgorithm(int i) {
-        switch (i) {
+    private static int id = 1;
+    
+    public static void setID(int i) {
+        id = i;
+    }
+    
+    public static int getID() {
+        return id;
+    }
+    
+    public static ISolver getAlgorithm() {
+        switch (id) {
             case 1:
                 return new DFSAlgorithm();
 

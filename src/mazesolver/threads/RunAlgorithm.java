@@ -30,6 +30,6 @@ public class RunAlgorithm {
     }
 
     public void start() throws InterruptedException {
-        AlgorithmFactory.getAlgorithm(GUI.algorithmIndex).solve(worker, grid);
+        AlgorithmFactory.getAlgorithm().solve(worker, grid);
     }
 }

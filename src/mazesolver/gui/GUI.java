@@ -24,12 +24,12 @@ import mazesolver.threads.IConnectUI;
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     static boolean setStart, setEnd, mouseInUse;
-    public static short algorithmIndex, algorithmSpeed;
+    public static short algorithmSpeed;
     public static boolean running;
     private int lastX, lastY;
     Grid grid;
     Menu menu;
-    IConnectUI cl;
+    IConnectUI connetionLayer;
 
     public GUI(BackgroundWorker cl) {
         this.setStart = false;
@@ -37,11 +37,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
-        this.algorithmIndex = 2;
         this.algorithmSpeed = 10;
         this.grid = new Grid(this);
         this.menu = new Menu(0, 0);
-        this.cl = cl;
+        this.connetionLayer = cl;
 
         setPreferredSize(new Dimension(MazeSolver.width, MazeSolver.height));
         setFocusable(true);
@@ -187,30 +186,30 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
                     if (running) {
                         System.out.println("start");
-                        cl.setGrid(grid);
-                        cl.setStarted(true);
+                        connetionLayer.setGrid(grid);
+                        connetionLayer.setStarted(true);
                     } else {
                         System.out.println("stop");
-                        cl.stopAlgorithm(true);
+                        connetionLayer.stopAlgorithm(true);
                     }
                     break;
 
                 // Solver choose
                 case KeyEvent.VK_1:
                     if (!running) {
-                        algorithmIndex = 1;
+                        AlgorithmFactory.setID(1);
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_2:
                     if (!running) {
-                        algorithmIndex = 2;
+                        AlgorithmFactory.setID(2);
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_3:
                     if (!running) {
-                        algorithmIndex = 3;
+                        AlgorithmFactory.setID(3);
                         repaint();
                     }
                     break;

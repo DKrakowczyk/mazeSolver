@@ -74,19 +74,19 @@ public class Menu {
             g.fillOval(700, 420, 340, 340);
 
             g.setColor(Color.WHITE);
-            if (GUI.algorithmIndex == 1) {
+            if (AlgorithmFactory.getID() == 1) {
                 g.setColor(new Color(168, 109, 47));
             }
             g.drawString("[1]  DFS alghoritm", 765, 490);
 
             g.setColor(Color.WHITE);
-            if (GUI.algorithmIndex == 2) {
+            if (AlgorithmFactory.getID() == 2) {
                 g.setColor(new Color(42, 170, 42));
             }
             g.drawString("[2]  BFS alghoritm", 765, 520);
 
             g.setColor(Color.WHITE);
-            if (GUI.algorithmIndex == 3) {
+            if (AlgorithmFactory.getID() == 3) {
                 g.setColor(new Color(106, 162, 244));
             }
             g.drawString("[3]  A* alghoritm", 765, 550);
