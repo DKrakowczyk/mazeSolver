@@ -58,6 +58,10 @@ public class Menu {
             g.setColor(Color.WHITE);
             g.drawString("C key: clear the grid", 15, 490);
             g.drawString("R key: generate random maze", 15, 520);
+            
+            if (GUI.running) {
+                g.setColor(new Color(238, 29, 7));
+            }
             g.drawString("Space: run/stop choosen algorithm", 15, 550);
 
             // Draw oval with alghoritms

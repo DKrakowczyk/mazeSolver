@@ -22,6 +22,6 @@ public class AlgorithmFactory {
     }
 
     public static ISolver getGenerator() {
-        return new Algorithm();
+        return new BFSAlgorithm();
     }
 }
