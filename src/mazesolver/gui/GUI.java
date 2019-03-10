@@ -6,14 +6,12 @@
 package mazesolver.gui;
 
 import mazesolver.threads.BackgroundWorker;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
-import mazesolver.generator.IGenerator;
 import mazesolver.alghoritms.AlgorithmFactory;
 import mazesolver.threads.IConnectUI;
 
@@ -175,8 +173,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 // Maze randomizing
                 case KeyEvent.VK_R:
                     if (!running) {
-                        IGenerator generator = GeneratorFactory.getGenerator(grid);
-                        generator.generate();
+                        GeneratorFactory.getGenerator(grid).generate();
                         repaint();
                     }
                     break;

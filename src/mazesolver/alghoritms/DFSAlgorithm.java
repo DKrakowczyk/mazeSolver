@@ -14,7 +14,7 @@ import mazesolver.threads.IConnectWorker;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class DFSAlgorithm implements ISolver {
+public class DFSAlgorithm implements IAlgorithm {
 
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {

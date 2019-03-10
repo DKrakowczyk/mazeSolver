@@ -6,11 +6,7 @@
 package mazesolver.threads;
 
 import mazesolver.grid.Grid;
-import mazesolver.grid.Node;
-import mazesolver.grid.Node.Types;
-import mazesolver.gui.GUI;
 import mazesolver.alghoritms.AlgorithmFactory;
-import mazesolver.threads.IConnectWorker;
 
 /**
  *

@@ -5,8 +5,6 @@
  */
 package mazesolver.threads;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mazesolver.grid.Grid;
 
 /**
@@ -30,14 +28,13 @@ public class Worker extends Thread {
                     break;
                 }
                 Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
-                RunAlgorithm alg = new RunAlgorithm();
-                alg.setWorker(worker);
-                alg.setGrid(grid);
-                alg.start();
+                RunAlgorithm algorithm = new RunAlgorithm();
+                algorithm.setWorker(worker);
+                algorithm.setGrid(grid);
+                algorithm.start();
                 worker.finished(); // Zakonczenie dzialania algorytmu
             } while (!worker.workerStopped());
         } catch (InterruptedException ex) {
-            Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

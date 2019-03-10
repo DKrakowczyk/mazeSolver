@@ -20,7 +20,7 @@ import mazesolver.threads.IConnectWorker;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class BFSAlgorithm implements ISolver {
+public class BFSAlgorithm implements IAlgorithm {
 
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
@@ -49,6 +49,7 @@ public class BFSAlgorithm implements ISolver {
             }
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
+                if(worker.workerStopped()) return;
                 if (end.equals(chlid)) {
                     solutionMap.put(chlid, state);
                     showSolution(solutionMap, grid);

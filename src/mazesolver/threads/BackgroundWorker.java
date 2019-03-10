@@ -76,7 +76,6 @@ public class BackgroundWorker implements IConnectWorker, IConnectUI {
     @Override
     public void stopAlgorithm(boolean stopAlgorithm) {
         this.stopAlgorithm = stopAlgorithm;
-      
     }
     
        @Override

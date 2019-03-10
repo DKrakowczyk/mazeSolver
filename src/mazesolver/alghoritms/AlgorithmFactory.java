@@ -12,23 +12,23 @@ package mazesolver.alghoritms;
 public class AlgorithmFactory {
 
     private static int id = 1;
-    
+
     public static void setID(int i) {
         id = i;
     }
-    
+
     public static int getID() {
         return id;
     }
-    
-    public static ISolver getAlgorithm() {
+
+    public static IAlgorithm getAlgorithm() {
         switch (id) {
             case 1:
                 return new DFSAlgorithm();
-
             case 2:
                 return new BFSAlgorithm();
+            default:
+                return null;
         }
-        return new DFSAlgorithm();
     }
 }

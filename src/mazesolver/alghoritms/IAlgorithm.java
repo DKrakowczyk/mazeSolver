@@ -14,7 +14,7 @@ import mazesolver.threads.IConnectWorker;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public interface ISolver {
+public interface IAlgorithm {
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException;
     public void showSolution(Map<Node, Node> mapaRozwiazan, Grid grid);
 }
