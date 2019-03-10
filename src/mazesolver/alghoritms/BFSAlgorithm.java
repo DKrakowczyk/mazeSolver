@@ -14,7 +14,7 @@ import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
 import mazesolver.gui.GUI;
-import mazesolver.threads.IWorker;
+import mazesolver.threads.IConnectWorker;
 
 /**
  *
@@ -23,7 +23,7 @@ import mazesolver.threads.IWorker;
 public class BFSAlgorithm implements ISolver {
 
     @Override
-    public void solve(IWorker worker, Grid grid) throws InterruptedException {
+    public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
         grid.clear();
         Node start = grid.getStart();
         Node end = grid.getEnd();

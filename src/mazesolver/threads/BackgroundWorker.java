@@ -7,13 +7,12 @@ package mazesolver.threads;
 
 import mazesolver.grid.Grid;
 import mazesolver.gui.GUI;
-import mazesolver.gui.IGUI;
 
 /**
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class WorkerLayer implements IWorker, IGUI {
+public class BackgroundWorker implements IConnectWorker, IConnectUI {
 
     Grid grid;
     int algorithm;

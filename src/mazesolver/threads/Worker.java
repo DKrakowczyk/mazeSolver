@@ -15,9 +15,9 @@ import mazesolver.grid.Grid;
  */
 public class Worker extends Thread {
 
-    IWorker worker;
+    IConnectWorker worker;
 
-    public Worker(IWorker worker) {
+    public Worker(IConnectWorker worker) {
         this.worker = worker;
     }
 

@@ -5,7 +5,7 @@
  */
 package mazesolver.gui;
 
-import mazesolver.threads.WorkerLayer;
+import mazesolver.threads.BackgroundWorker;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,6 +15,7 @@ import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
 import mazesolver.generator.IGenerator;
 import mazesolver.alghoritms.AlgorithmFactory;
+import mazesolver.threads.IConnectUI;
 
 /**
  *
@@ -28,9 +29,9 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     private int lastX, lastY;
     Grid grid;
     Menu menu;
-    IGUI cl;
+    IConnectUI cl;
 
-    public GUI(WorkerLayer cl) {
+    public GUI(BackgroundWorker cl) {
         this.setStart = false;
         this.setEnd = false;
         mouseInUse = false;

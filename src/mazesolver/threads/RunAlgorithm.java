@@ -10,7 +10,7 @@ import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
 import mazesolver.gui.GUI;
 import mazesolver.alghoritms.AlgorithmFactory;
-import mazesolver.threads.IWorker;
+import mazesolver.threads.IConnectWorker;
 
 /**
  *
@@ -19,13 +19,13 @@ import mazesolver.threads.IWorker;
 public class RunAlgorithm {
 
     Grid grid;
-    IWorker worker;
+    IConnectWorker worker;
 
     public void setGrid(Grid grid) {
         this.grid = grid;
     }
 
-    public void setWorker(IWorker worker) {
+    public void setWorker(IConnectWorker worker) {
         this.worker = worker;
     }
 

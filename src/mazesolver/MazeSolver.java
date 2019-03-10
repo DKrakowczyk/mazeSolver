@@ -3,7 +3,7 @@ package mazesolver;
 import mazesolver.gui.GUI;
 import java.awt.*;
 import javax.swing.*;
-import mazesolver.threads.WorkerLayer;
+import mazesolver.threads.BackgroundWorker;
 import mazesolver.threads.Worker;
 
 /**
@@ -24,9 +24,9 @@ public class MazeSolver extends JFrame {
         setLayout(new GridLayout(1, 1, 0, 0));
 
         // Add GUI to Frame
-        WorkerLayer cm = new WorkerLayer();
-        GUI gui = new GUI(cm);
-        Worker w = new Worker(cm);     
+        BackgroundWorker bgWorker = new BackgroundWorker();
+        GUI gui = new GUI(bgWorker);
+        Worker w = new Worker(bgWorker);     
         
         add(gui);
         pack(); 

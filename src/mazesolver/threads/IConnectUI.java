@@ -11,19 +11,19 @@ import mazesolver.grid.Grid;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public interface IWorker {
+public interface IConnectUI {
 
-    void finished();
+    boolean isStarted();
 
-    int getAlgorithm();
+    void setAlgorithm(int algo);
 
-    Grid getGrid();
+    void setGrid(Grid grid);
 
-    boolean algorithmStopped();
+    void stopAlgorithm(boolean shouldStop);
 
-    boolean workerStopped();
+    void setStarted(boolean start);
 
-    void start() throws InterruptedException;
+    void stopWorker(boolean stopWorker);
     
-    void stopRunning();
-}   
+    boolean isFinished();
+}

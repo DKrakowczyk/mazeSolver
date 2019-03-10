@@ -8,13 +8,13 @@ package mazesolver.alghoritms;
 import java.util.Map;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
-import mazesolver.threads.IWorker;
+import mazesolver.threads.IConnectWorker;
 
 /**
  *
  * @author DKrakowczyk & M. Kucharskov
  */
 public interface ISolver {
-    public void solve(IWorker worker, Grid grid) throws InterruptedException;
+    public void solve(IConnectWorker worker, Grid grid) throws InterruptedException;
     public void showSolution(Map<Node, Node> mapaRozwiazan, Grid grid);
 }
