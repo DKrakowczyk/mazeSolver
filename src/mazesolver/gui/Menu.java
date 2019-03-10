@@ -6,7 +6,7 @@
 package mazesolver.gui;
 
 import java.awt.*;
-import mazesolver.solver.SolverFactory;
+import mazesolver.solver.AlgorithmFactory;
 
 /**
  *
@@ -65,19 +65,19 @@ public class Menu {
             g.fillOval(700, 420, 340, 340);
             
             g.setColor(Color.WHITE);
-            if(SolverFactory.getID() == 1) {
+            if(AlgorithmFactory.getID() == 1) {
                 g.setColor(new Color(106, 162, 244));
             }
             g.drawString("[1]  DFS alghoritm", 765, 490);
             
             g.setColor(Color.WHITE);
-            if(SolverFactory.getID() == 2) {
+            if(AlgorithmFactory.getID() == 2) {
                 g.setColor(new Color(106, 162, 244));
             }
             g.drawString("[2]  BFS alghoritm", 765, 520);
             
             g.setColor(Color.WHITE);
-            if(SolverFactory.getID() == 3) {
+            if(AlgorithmFactory.getID() == 3) {
                 g.setColor(new Color(106, 162, 244));
             }
             g.drawString("[3]  A* alghoritm", 765, 550);

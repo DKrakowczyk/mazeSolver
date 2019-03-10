@@ -11,23 +11,23 @@ import mazesolver.grid.Grid;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class ComLayer implements IWorker, IGUI {
+public class WorkerLayer implements IWorker, IGUI {
 
     Grid grid;
     int algorithm;
     boolean started;
     boolean stopAlgorithm;
-    boolean stopWorker;
+    boolean workerStopped;
     boolean finished;
 
     @Override
     public synchronized boolean workerStopped() {
-        return stopWorker;
+        return workerStopped;
     }
 
     @Override
     public synchronized void stopWorker(boolean stopWorker) {
-        this.stopWorker = stopWorker;
+        this.workerStopped = stopWorker;
         if (stopWorker) stopAlgorithm = true;
 
         notifyAll();
@@ -36,7 +36,7 @@ public class ComLayer implements IWorker, IGUI {
     @Override
     public synchronized void start() throws InterruptedException {
 
-        while (!(started || stopWorker)) {
+        while (!(started || workerStopped)) {
             this.wait();
         }
 
@@ -68,13 +68,14 @@ public class ComLayer implements IWorker, IGUI {
     }
 
     @Override
-    public synchronized boolean isStopAlgo() {
+    public synchronized boolean algorithmStopped() {
         return stopAlgorithm;
     }
 
     @Override
     public void stopAlgorithm(boolean stopAlgorithm) {
         this.stopAlgorithm = stopAlgorithm;
+      
     }
     
        @Override
@@ -95,5 +96,11 @@ public class ComLayer implements IWorker, IGUI {
     @Override
     public synchronized Grid getGrid() {
         return grid;
+    }
+
+    @Override
+    public void stopRunning() {
+        GUI.running = false;
+        stopAlgorithm(true);
     }
 }

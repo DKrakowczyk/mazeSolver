@@ -15,6 +15,5 @@ public class GeneratorFactory {
 
     public static IGenerator getGenerator(Grid grid) {
         return new BacktrackGenerator(grid);
-
     }
 }

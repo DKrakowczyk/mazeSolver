@@ -9,7 +9,7 @@ package mazesolver.solver;
  *
  * @author DKrakowczyk & M. Kucharskov
  */
-public class SolverFactory {
+public class AlgorithmFactory {
 
     private static int id = 1;
 
@@ -18,14 +18,10 @@ public class SolverFactory {
     }
 
     public static void setID(int id) {
-        SolverFactory.id = id;
+        AlgorithmFactory.id = id;
     }
 
-    public static ISolver getSolver() {
-        switch (SolverFactory.id) {
-            default:
-                return null;
-        }
-
+    public static ISolver getGenerator() {
+        return new Algorithm();
     }
 }

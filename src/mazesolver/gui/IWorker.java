@@ -19,10 +19,11 @@ public interface IWorker {
 
     Grid getGrid();
 
-    boolean isStopAlgo();
+    boolean algorithmStopped();
 
     boolean workerStopped();
 
     void start() throws InterruptedException;
     
-}
+    void stopRunning();
+}   

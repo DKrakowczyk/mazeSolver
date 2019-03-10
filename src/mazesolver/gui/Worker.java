@@ -32,7 +32,7 @@ public class Worker extends Thread {
                 }
                 Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
                 Algo alg = new Algo();
-                alg.setCm(worker);
+                alg.setWorker(worker);
                 alg.setGrid(grid);
                 alg.start();
                 worker.finished(); // Zakonczenie dzialania algorytmu

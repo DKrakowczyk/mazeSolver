@@ -13,7 +13,7 @@ import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
 import mazesolver.generator.IGenerator;
-import mazesolver.solver.SolverFactory;
+import mazesolver.solver.AlgorithmFactory;
 
 /**
  *
@@ -21,13 +21,14 @@ import mazesolver.solver.SolverFactory;
  */
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
-    static boolean setStart, setEnd, mouseInUse, running;
+    static boolean setStart, setEnd, mouseInUse;
+    public static boolean running;
     private int lastX, lastY;
     Grid grid;
     Menu menu;
     IGUI cl;
 
-    public GUI(ComLayer cl) {
+    public GUI(WorkerLayer cl) {
         this.setStart = false;
         this.setEnd = false;
         mouseInUse = false;
@@ -181,31 +182,31 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
                     if (running) {
                         System.out.println("start");
+                        AlgorithmFactory.getGenerator();
                         cl.setGrid(grid);
                         cl.setStarted(true);
                     } else {
                         System.out.println("stop");
                         cl.stopAlgorithm(true);
                     }
-
                     break;
 
                 // Solver choose
                 case KeyEvent.VK_1:
                     if (!running) {
-                        SolverFactory.setID(1);
+                        AlgorithmFactory.setID(1);
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_2:
                     if (!running) {
-                        SolverFactory.setID(2);
+                        AlgorithmFactory.setID(2);
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_3:
                     if (!running) {
-                        SolverFactory.setID(3);
+                        AlgorithmFactory.setID(3);
                         repaint();
                     }
                     break;

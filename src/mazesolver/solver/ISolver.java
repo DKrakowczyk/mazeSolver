@@ -5,10 +5,13 @@
  */
 package mazesolver.solver;
 
+import mazesolver.grid.Grid;
+import mazesolver.gui.IWorker;
+
 /**
  *
- * @author DKrakowczyk & M. Kucharskov
+ * @author Dawid
  */
 public interface ISolver {
-    //
+    public void solve(IWorker worker, Grid grid) throws InterruptedException;
 }

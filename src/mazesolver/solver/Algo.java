@@ -8,6 +8,7 @@ package mazesolver.solver;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
+import mazesolver.gui.GUI;
 import mazesolver.gui.IWorker;
 
 /**
@@ -17,41 +18,25 @@ import mazesolver.gui.IWorker;
 public class Algo {
 
     Grid grid;
-    IWorker cm;
+    IWorker worker;
 
     public Grid getGrid() {
         return grid;
     }
 
-    public void setGrid(Grid gerid) {
-        this.grid = gerid;
+    public void setGrid(Grid grid) {
+        this.grid = grid;
     }
 
-    public IWorker getCm() {
-        return cm;
+    public IWorker getWorker() {
+        return worker;
     }
 
-    public void setCm(IWorker cm) {
-        this.cm = cm;
+    public void setWorker(IWorker worker) {
+        this.worker = worker;
     }
-
+    
     public void start() throws InterruptedException {
-        grid.clear();
-        System.out.println("Algorytm liczy");
-        do {
-            for (int y = 0; y < grid.getRows(); y++) {
-                for (int x = 0; x < grid.getCols(); x++) {
-                    if(cm.isStopAlgo()) break;
-                    Node n = grid.getNode(x, y);
-                    if(n.getType() != Types.WALL) n.setType(Types.VISITED);
-                    else continue;
-                    cm.getGrid().repaint();
-                    Thread.sleep(100);
-                }
-            }
-
-            System.out.println("Algo: Liczy");
-        } while (!cm.isStopAlgo());
-        System.out.println("Algo: Kończenie algorytmu");
+        AlgorithmFactory.getGenerator().solve(worker, grid);
     }
 }
