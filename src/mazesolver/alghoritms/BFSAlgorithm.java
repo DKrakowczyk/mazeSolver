@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import mazesolver.MazeSolver;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
@@ -66,7 +67,7 @@ public class BFSAlgorithm implements IAlgorithm {
                     if (chlid != grid.getEnd() && chlid != grid.getStart()) {
                         chlid.setType(Types.VISITED);
                         worker.getGrid().repaint();
-                        Thread.sleep(Menu.algorithmSpeed);
+                        Thread.sleep(Menu.getDelay());
                     }
                 }
             }
@@ -93,7 +94,6 @@ public class BFSAlgorithm implements IAlgorithm {
             Menu.alertMessage = 3;
             Menu.showAlert = true;
             grid.repaint();
-
         } else {
             Menu.alertMessage = 2;
             Menu.showAlert = true;

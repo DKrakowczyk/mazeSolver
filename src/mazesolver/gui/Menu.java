@@ -6,7 +6,7 @@
 package mazesolver.gui;
 
 import java.awt.*;
-import java.text.DecimalFormat;
+import mazesolver.MazeSolver;
 import mazesolver.alghoritms.AlgorithmFactory;
 
 /**
@@ -16,7 +16,7 @@ import mazesolver.alghoritms.AlgorithmFactory;
 public class Menu {
 
     public static boolean showAlert;
-    public static short algorithmSpeed, alertMessage;
+    public static short speedMultipler, alertMessage;
     int x, y;
     boolean hidden;
 
@@ -24,9 +24,13 @@ public class Menu {
         this.x = x;
         this.y = y;
         this.hidden = true;
-        this.algorithmSpeed = 10;
+        this.speedMultipler = 100;
         this.alertMessage = 0;
         this.showAlert = false;
+    }
+
+    public static int getDelay() {
+        return MazeSolver.delay * (205 - speedMultipler) / 100;
     }
 
     public void draw(Graphics g) {
@@ -73,9 +77,7 @@ public class Menu {
             }
             g.drawString("Space: run/stop choosen algorithm", 15, 535);
             g.setColor(Color.WHITE);
-            DecimalFormat df = new DecimalFormat("#.#");
-            double d = (double) (algorithmSpeed)/10;
-            g.drawString("Arrows: adjust speed: " + df.format(d), 15, 565);
+            g.drawString("Arrows: adjust speed: " + speedMultipler + "%", 15, 565);
 
             // Draw oval with alghoritms
             g.setColor(new Color(41, 43, 45, 160));

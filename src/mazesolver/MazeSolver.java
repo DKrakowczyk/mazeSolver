@@ -16,6 +16,7 @@ public class MazeSolver extends JFrame {
     public static final int height = 580;
     public static final int width = 900;
     public static final int nodeSize = 20;
+    public static final int delay = 20;
     
     public MazeSolver() throws InterruptedException {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

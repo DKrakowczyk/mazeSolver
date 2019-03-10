@@ -58,7 +58,7 @@ public class Grid {
             g.drawLine(0, i * MazeSolver.nodeSize, MazeSolver.width, i * MazeSolver.nodeSize);
         }
     }
-    
+
     public void repaint() {
         g.repaint();
     }
@@ -126,7 +126,9 @@ public class Grid {
 
     public void setEmpty(int x, int y) {
         Node n = getNode(x, y);
-        n.setType(Types.EMPTY);
+        if (n.getType() == Types.WALL) {
+            n.setType(Types.EMPTY);
+        }
     }
 
     public void erase() {

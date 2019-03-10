@@ -58,7 +58,7 @@ public class DFSAlgorithm implements IAlgorithm {
                     if (child != grid.getEnd() && child != grid.getStart()) {
                         child.setType(Types.VISITED);
                         worker.getGrid().repaint();
-                        Thread.sleep(Menu.algorithmSpeed);
+                        Thread.sleep(Menu.getDelay());
                     }
                 }
             }
