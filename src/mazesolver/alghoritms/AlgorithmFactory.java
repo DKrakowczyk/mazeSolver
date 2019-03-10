@@ -24,9 +24,9 @@ public class AlgorithmFactory {
     public static IAlgorithm getAlgorithm() {
         switch (id) {
             case 1:
-                return new DFSAlgorithm();
-            case 2:
                 return new BFSAlgorithm();
+            case 2:
+                return new DFSAlgorithm();
             default:
                 return null;
         }

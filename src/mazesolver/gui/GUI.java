@@ -22,7 +22,7 @@ import mazesolver.threads.IConnectUI;
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     static boolean setStart, setEnd, mouseInUse;
-    public static short algorithmSpeed;
+
     public static boolean running;
     private int lastX, lastY;
     Grid grid;
@@ -35,7 +35,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
-        this.algorithmSpeed = 10;
         this.grid = new Grid(this);
         this.menu = new Menu(0, 0);
         this.connetionLayer = cl;
@@ -55,6 +54,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
+      
         if (!running) {
             int x = (me.getX()) / MazeSolver.nodeSize;
             int y = (me.getY()) / MazeSolver.nodeSize;
@@ -77,6 +77,8 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent me) {
+        Menu.showAlert = false;
+        this.repaint();
         if (!running) {
             mouseInUse = true;
             repaint();
@@ -179,16 +181,20 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
                 // Solver run/stop
                 case KeyEvent.VK_SPACE:
-                    running = !running;
-
-                    if (running) {
-                        System.out.println("start");
-                        connetionLayer.setGrid(grid);
-                        connetionLayer.setStarted(true);
+                    if (grid.getStart() != null && grid.getEnd() != null) {
+                        running = !running;
+                        if (running) {
+                            connetionLayer.setGrid(grid);
+                            connetionLayer.setStarted(true);
+                        }
+                        Menu.alertMessage = 0;
+                        Menu.showAlert = false;
                     } else {
-                        System.out.println("stop");
-                        connetionLayer.stopAlgorithm(true);
+                        Menu.alertMessage = 1;
+                        Menu.showAlert = true;
+                        repaint();
                     }
+
                     break;
 
                 // Solver choose
@@ -212,14 +218,14 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
                 // Adjusting speed of the algorithm
                 case KeyEvent.VK_LEFT:
-                    if (algorithmSpeed < 50) {
-                        algorithmSpeed++;
+                    if (Menu.algorithmSpeed < 50) {
+                        Menu.algorithmSpeed++;
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_RIGHT:
-                    if (algorithmSpeed > 1) {
-                        algorithmSpeed--;
+                    if (Menu.algorithmSpeed > 1) {
+                        Menu.algorithmSpeed--;
                         repaint();
                     }
                     break;

@@ -14,6 +14,7 @@ import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
 import mazesolver.gui.GUI;
+import mazesolver.gui.Menu;
 import mazesolver.threads.IConnectWorker;
 
 /**
@@ -24,6 +25,7 @@ public class BFSAlgorithm implements IAlgorithm {
 
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
+        boolean solutionFound = false;
         grid.clear();
         Node start = grid.getStart();
         Node end = grid.getEnd();
@@ -41,11 +43,18 @@ public class BFSAlgorithm implements IAlgorithm {
         solutionMap.put(start, null);
 
         while (queue.size() > 0) {
+            if (!GUI.running) {
+                return;
+            }
             Node state = queue.poll();
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
-                if(worker.workerStopped()) return;
+                if (worker.workerStopped()) {
+                    return;
+                }
                 if (end.equals(chlid)) {
+                    solutionFound = true;
+                    checkForAlerts(solutionFound, grid);
                     solutionMap.put(chlid, state);
                     showSolution(solutionMap, grid);
                     worker.stopRunning();
@@ -57,11 +66,13 @@ public class BFSAlgorithm implements IAlgorithm {
                     if (chlid != grid.getEnd() && chlid != grid.getStart()) {
                         chlid.setType(Types.VISITED);
                         worker.getGrid().repaint();
-                        Thread.sleep(GUI.algorithmSpeed);
+                        Thread.sleep(Menu.algorithmSpeed);
                     }
                 }
             }
         }
+        checkForAlerts(solutionFound, grid);
+        return;
     }
 
     @Override
@@ -74,6 +85,20 @@ public class BFSAlgorithm implements IAlgorithm {
             Node rodzic = solutionMap.get(state);
             state = rodzic;
             grid.repaint();
+        }
+    }
+
+    private void checkForAlerts(boolean solved, Grid grid) {
+        if (solved) {
+            Menu.alertMessage = 3;
+            Menu.showAlert = true;
+            grid.repaint();
+
+        } else {
+            Menu.alertMessage = 2;
+            Menu.showAlert = true;
+            grid.repaint();
+            GUI.running = false;
         }
     }
 }
