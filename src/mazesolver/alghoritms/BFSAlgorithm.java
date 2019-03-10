@@ -42,11 +42,6 @@ public class BFSAlgorithm implements IAlgorithm {
 
         while (queue.size() > 0) {
             Node state = queue.poll();
-            if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Types.VISITED);
-                worker.getGrid().repaint();
-                Thread.sleep(GUI.algorithmSpeed);
-            }
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
                 if(worker.workerStopped()) return;
@@ -59,6 +54,11 @@ public class BFSAlgorithm implements IAlgorithm {
                 if (!solutionMap.containsKey(chlid)) {
                     queue.add(chlid);
                     solutionMap.put(chlid, state);
+                    if (chlid != grid.getEnd() && chlid != grid.getStart()) {
+                        chlid.setType(Types.VISITED);
+                        worker.getGrid().repaint();
+                        Thread.sleep(GUI.algorithmSpeed);
+                    }
                 }
             }
         }

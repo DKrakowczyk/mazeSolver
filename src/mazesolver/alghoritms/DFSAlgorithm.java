@@ -36,11 +36,7 @@ public class DFSAlgorithm implements IAlgorithm {
         while (stack.size() > 0) {
             Node state = stack.peek(); //Pobierz element
             stack.pop();
-            if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Types.VISITED);
-                worker.getGrid().repaint();
-                Thread.sleep(GUI.algorithmSpeed);
-            }
+
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node child : childs) {
                 if (end.equals(child)) {
@@ -52,6 +48,11 @@ public class DFSAlgorithm implements IAlgorithm {
                 if (!solutionMap.containsKey(child)) {
                     stack.add(child);
                     solutionMap.put(child, state);
+                    if (child != grid.getEnd() && child != grid.getStart()) {
+                        child.setType(Types.VISITED);
+                        worker.getGrid().repaint();
+                        Thread.sleep(GUI.algorithmSpeed);
+                    }
                 }
             }
         }
