@@ -28,8 +28,8 @@ public class RunAlgorithm {
     public void setWorker(IWorker worker) {
         this.worker = worker;
     }
-    
+
     public void start() throws InterruptedException {
-        AlgorithmFactory.getGenerator().solve(worker, grid);
+        AlgorithmFactory.getAlgorithm(GUI.algorithmIndex).solve(worker, grid);
     }
 }

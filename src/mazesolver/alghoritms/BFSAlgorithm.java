@@ -13,6 +13,7 @@ import java.util.Queue;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
+import mazesolver.gui.GUI;
 import mazesolver.threads.IWorker;
 
 /**
@@ -44,7 +45,7 @@ public class BFSAlgorithm implements ISolver {
             if (state != grid.getEnd() && state != grid.getStart()) {
                 state.setType(Types.VISITED);
                 worker.getGrid().repaint();
-                Thread.sleep(10);
+                Thread.sleep(GUI.algorithmSpeed);
             }
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
@@ -67,7 +68,7 @@ public class BFSAlgorithm implements ISolver {
         Node state = grid.getEnd();
         while (state != grid.getStart()) {
             if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Types.SOLUTION_BFS);
+                state.setType(Types.SOLUTION);
             }
             Node rodzic = solutionMap.get(state);
             state = rodzic;

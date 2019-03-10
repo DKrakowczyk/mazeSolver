@@ -7,6 +7,7 @@ import java.util.Stack;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
+import mazesolver.gui.GUI;
 import mazesolver.threads.IWorker;
 
 /**
@@ -25,10 +26,10 @@ public class DFSAlgorithm implements ISolver {
             worker.stopRunning();
             return;
         }
-        
+
         Stack<Node> stack = new Stack<>();
         Map<Node, Node> solutionMap = new LinkedHashMap<>();
-        
+
         stack.add(start);
         solutionMap.put(start, null);
 
@@ -38,13 +39,15 @@ public class DFSAlgorithm implements ISolver {
             if (state != grid.getEnd() && state != grid.getStart()) {
                 state.setType(Types.VISITED);
                 worker.getGrid().repaint();
-                Thread.sleep(10);
+                Thread.sleep(GUI.algorithmSpeed);
             }
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node child : childs) {
                 if (end.equals(child)) {
                     solutionMap.put(child, state);
                     showSolution(solutionMap, grid);
+                    worker.stopRunning();
+                    return;
                 }
                 if (!solutionMap.containsKey(child)) {
                     stack.add(child);
@@ -59,7 +62,7 @@ public class DFSAlgorithm implements ISolver {
         Node state = grid.getEnd();
         while (state != grid.getStart()) {
             if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Node.Types.SOLUTION_DFS);
+                state.setType(Node.Types.SOLUTION);
             }
             Node rodzic = solutionMap.get(state);
             state = rodzic;

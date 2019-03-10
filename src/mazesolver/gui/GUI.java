@@ -23,6 +23,7 @@ import mazesolver.alghoritms.AlgorithmFactory;
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     static boolean setStart, setEnd, mouseInUse;
+    public static short algorithmIndex, algorithmSpeed;
     public static boolean running;
     private int lastX, lastY;
     Grid grid;
@@ -35,6 +36,8 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
         mouseInUse = false;
         this.lastX = -1;
         this.lastY = -1;
+        this.algorithmIndex = 2;
+        this.algorithmSpeed = 10;
         this.grid = new Grid(this);
         this.menu = new Menu(0, 0);
         this.cl = cl;
@@ -183,7 +186,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
                     if (running) {
                         System.out.println("start");
-                        AlgorithmFactory.getGenerator();
                         cl.setGrid(grid);
                         cl.setStarted(true);
                     } else {
@@ -195,19 +197,32 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                 // Solver choose
                 case KeyEvent.VK_1:
                     if (!running) {
-                        AlgorithmFactory.setID(1);
+                        algorithmIndex = 1;
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_2:
                     if (!running) {
-                        AlgorithmFactory.setID(2);
+                        algorithmIndex = 2;
                         repaint();
                     }
                     break;
                 case KeyEvent.VK_3:
                     if (!running) {
-                        AlgorithmFactory.setID(3);
+                        algorithmIndex = 3;
+                        repaint();
+                    }
+                    break;
+                // Adjusting speed of the algorithm
+                case KeyEvent.VK_LEFT:
+                    if (algorithmSpeed < 50) {
+                        algorithmSpeed++;
+                        repaint();
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if (algorithmSpeed > 1) {
+                        algorithmSpeed--;
                         repaint();
                     }
                     break;

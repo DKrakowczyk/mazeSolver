@@ -59,12 +59,10 @@ public class Node {
             case VISITED:
                 g.setColor(new Color(127, 130, 127));
                 break;
-            case SOLUTION_BFS:
+            case SOLUTION:
                 g.setColor(new Color(42, 170, 42));
                 break;
-            case SOLUTION_DFS:
-                g.setColor(new Color(168, 109, 47));
-                break;
+          
         }
 
         // Draw square with nodeSize size
@@ -102,6 +100,6 @@ public class Node {
 
     // Enum to recognize node by program (color for human)
     public static enum Types {
-        EMPTY, WALL, START, END, VISITED, SOLUTION_BFS, SOLUTION_DFS
+        EMPTY, WALL, START, END, VISITED, SOLUTION
     }
 }
