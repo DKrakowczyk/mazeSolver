@@ -217,14 +217,14 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     }
                     break;
                 // Adjusting speed of the algorithm
-                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_RIGHT:
                 case KeyEvent.VK_UP:
                     if (Menu.speedMultipler < 200) {
                         Menu.speedMultipler += 5;
                         repaint();
                     }
                     break;
-                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_DOWN:
                     if (Menu.speedMultipler > 5) {
                         Menu.speedMultipler -= 5;
