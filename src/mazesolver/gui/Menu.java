@@ -6,7 +6,7 @@
 package mazesolver.gui;
 
 import java.awt.*;
-import mazesolver.solver.AlgorithmFactory;
+import mazesolver.alghoritms.AlgorithmFactory;
 
 /**
  *

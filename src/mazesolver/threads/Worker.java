@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazesolver.gui;
+package mazesolver.threads;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mazesolver.grid.Grid;
-import mazesolver.solver.Algo;
 
 /**
  *
@@ -31,7 +30,7 @@ public class Worker extends Thread {
                     break;
                 }
                 Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
-                Algo alg = new Algo();
+                RunAlgorithm alg = new RunAlgorithm();
                 alg.setWorker(worker);
                 alg.setGrid(grid);
                 alg.start();

@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazesolver.gui;
+package mazesolver.threads;
 
 import mazesolver.grid.Grid;
+import mazesolver.gui.GUI;
+import mazesolver.gui.IGUI;
 
 /**
  *

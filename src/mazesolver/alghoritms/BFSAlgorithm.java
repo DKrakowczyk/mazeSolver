@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazesolver.solver;
+package mazesolver.alghoritms;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -13,11 +13,11 @@ import java.util.Queue;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
-import mazesolver.gui.IWorker;
+import mazesolver.threads.IWorker;
 
 /**
  *
- * @author Dawid
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class BFSAlgorithm implements ISolver {
 
@@ -33,11 +33,11 @@ public class BFSAlgorithm implements ISolver {
         }
 
         Queue<Node> queue = new LinkedList<>();
-        Map<Node, Node> solution = new LinkedHashMap<>();
+        Map<Node, Node> solutionMap = new LinkedHashMap<>();
 
         queue.add(start);
 
-        solution.put(start, null);
+        solutionMap.put(start, null);
 
         while (queue.size() > 0) {
             Node state = queue.poll();
@@ -49,29 +49,29 @@ public class BFSAlgorithm implements ISolver {
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
                 if (end.equals(chlid)) {
-                    solution.put(chlid, state);
-                    showRozwiazanie(solution, grid);
+                    solutionMap.put(chlid, state);
+                    showSolution(solutionMap, grid);
                     worker.stopRunning();
                     return;
                 }
-                if (!solution.containsKey(chlid)) {
+                if (!solutionMap.containsKey(chlid)) {
                     queue.add(chlid);
-                    solution.put(chlid, state);
+                    solutionMap.put(chlid, state);
                 }
             }
         }
     }
 
-    public void showRozwiazanie(Map<Node, Node> mapaRozwiazan, Grid grid) {
-        Node stan = grid.getEnd();
-        while (stan != grid.getStart()) {
-            if (stan != grid.getEnd() && stan != grid.getStart()) {
-                stan.setType(Types.SOLUTION);
+    @Override
+    public void showSolution(Map<Node, Node> solutionMap, Grid grid) {
+        Node state = grid.getEnd();
+        while (state != grid.getStart()) {
+            if (state != grid.getEnd() && state != grid.getStart()) {
+                state.setType(Types.SOLUTION_BFS);
             }
-            Node rodzic = mapaRozwiazan.get(stan);
-            stan = rodzic;
+            Node rodzic = solutionMap.get(state);
+            state = rodzic;
             grid.repaint();
         }
     }
-
 }

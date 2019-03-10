@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazesolver.solver;
+package mazesolver.alghoritms;
 
+import java.util.Map;
 import mazesolver.grid.Grid;
-import mazesolver.gui.IWorker;
+import mazesolver.grid.Node;
+import mazesolver.threads.IWorker;
 
 /**
  *
- * @author Dawid
+ * @author DKrakowczyk & M. Kucharskov
  */
 public interface ISolver {
     public void solve(IWorker worker, Grid grid) throws InterruptedException;
+    public void showSolution(Map<Node, Node> mapaRozwiazan, Grid grid);
 }

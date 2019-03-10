@@ -5,6 +5,7 @@
  */
 package mazesolver.gui;
 
+import mazesolver.threads.WorkerLayer;
 import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +14,7 @@ import mazesolver.grid.Grid;
 import mazesolver.MazeSolver;
 import mazesolver.generator.GeneratorFactory;
 import mazesolver.generator.IGenerator;
-import mazesolver.solver.AlgorithmFactory;
+import mazesolver.alghoritms.AlgorithmFactory;
 
 /**
  *

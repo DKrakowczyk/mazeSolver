@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mazesolver.solver;
+package mazesolver.alghoritms;
 
 /**
  *
@@ -22,6 +22,6 @@ public class AlgorithmFactory {
     }
 
     public static ISolver getGenerator() {
-        return new BFSAlgorithm();
+        return new DFSAlgorithm();
     }
 }

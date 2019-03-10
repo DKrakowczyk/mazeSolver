@@ -57,10 +57,13 @@ public class Node {
                 g.setColor(new Color(238, 29, 7));
                 break;
             case VISITED:
-                g.setColor(new Color(106, 162, 244));
+                g.setColor(new Color(127, 130, 127));
                 break;
-            case SOLUTION:
-                g.setColor(new Color(60, 142, 4));
+            case SOLUTION_BFS:
+                g.setColor(new Color(42, 170, 42));
+                break;
+            case SOLUTION_DFS:
+                g.setColor(new Color(168, 109, 47));
                 break;
         }
 
@@ -99,6 +102,6 @@ public class Node {
 
     // Enum to recognize node by program (color for human)
     public static enum Types {
-        EMPTY, WALL, START, END, VISITED, SOLUTION
+        EMPTY, WALL, START, END, VISITED, SOLUTION_BFS, SOLUTION_DFS
     }
 }

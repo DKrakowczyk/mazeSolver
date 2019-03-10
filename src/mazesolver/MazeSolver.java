@@ -3,8 +3,8 @@ package mazesolver;
 import mazesolver.gui.GUI;
 import java.awt.*;
 import javax.swing.*;
-import mazesolver.gui.WorkerLayer;
-import mazesolver.gui.Worker;
+import mazesolver.threads.WorkerLayer;
+import mazesolver.threads.Worker;
 
 /**
  *
