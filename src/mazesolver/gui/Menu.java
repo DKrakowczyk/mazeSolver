@@ -47,7 +47,7 @@ public class Menu {
         } else {
             // Draw oval box with text and data
             g.setColor(new Color(41, 43, 45, 160));
-            g.fillOval(-90, 340, 360, 360);
+            g.fillRect(0, 360, 260, 360);
 
             g.setColor(Color.WHITE);
             g.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -81,7 +81,7 @@ public class Menu {
 
             // Draw oval with alghoritms
             g.setColor(new Color(41, 43, 45, 160));
-            g.fillOval(700, 420, 340, 340);
+            g.fillRect(740, 460, 180, 340);
 
             g.setColor(Color.WHITE);
             if (AlgorithmFactory.getID() == 1) {

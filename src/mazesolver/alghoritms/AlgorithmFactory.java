@@ -28,7 +28,7 @@ public class AlgorithmFactory {
             case 2:
                 return new DFSAlgorithm();
             default:
-                return null;
+                return new DijkstraAlgorithm();
         }
     }
 }

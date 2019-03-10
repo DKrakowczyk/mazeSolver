@@ -185,4 +185,7 @@ public class Grid {
 
         return result;
     }
+    public List<Node> getNodes(){
+        return nodes;
+    }
 }
