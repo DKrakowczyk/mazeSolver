@@ -8,7 +8,7 @@ package mazesolver.solver;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
-import mazesolver.gui.WorkerCom;
+import mazesolver.gui.IWorker;
 
 /**
  *
@@ -17,7 +17,7 @@ import mazesolver.gui.WorkerCom;
 public class Algo {
 
     Grid grid;
-    WorkerCom cm;
+    IWorker cm;
 
     public Grid getGrid() {
         return grid;
@@ -27,11 +27,11 @@ public class Algo {
         this.grid = gerid;
     }
 
-    public WorkerCom getCm() {
+    public IWorker getCm() {
         return cm;
     }
 
-    public void setCm(WorkerCom cm) {
+    public void setCm(IWorker cm) {
         this.cm = cm;
     }
 

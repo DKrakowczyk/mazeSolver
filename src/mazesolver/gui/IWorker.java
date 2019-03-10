@@ -9,19 +9,19 @@ import mazesolver.grid.Grid;
 
 /**
  *
- * @author Marcin
+ * @author DKrakowczyk & M. Kucharskov
  */
-public interface WorkerCom {
+public interface IWorker {
 
     void finished();
 
-    int getAlgo();
+    int getAlgorithm();
 
     Grid getGrid();
 
     boolean isStopAlgo();
 
-    boolean isStopWorker();
+    boolean workerStopped();
 
     void start() throws InterruptedException;
     

@@ -9,21 +9,21 @@ import mazesolver.grid.Grid;
 
 /**
  *
- * @author Marcin
+ * @author DKrakowczyk & M. Kucharskov
  */
-public interface GUICom {
+public interface IGUI {
 
-    boolean isStart();
+    boolean isStarted();
 
-    void setAlgo(int algo);
+    void setAlgorithm(int algo);
 
     void setGrid(Grid grid);
 
-    void setStopAlgo(boolean shouldStop);
+    void stopAlgorithm(boolean shouldStop);
 
-    void setStart(boolean start);
+    void setStarted(boolean start);
 
-    void setStopWorker(boolean stopWorker);
+    void stopWorker(boolean stopWorker);
     
     boolean isFinished();
 }

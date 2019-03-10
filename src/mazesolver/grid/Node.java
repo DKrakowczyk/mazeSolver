@@ -97,7 +97,7 @@ public class Node {
         return true;
     }
 
-    // Enum to recognize nude by program (color for human)
+    // Enum to recognize node by program (color for human)
     public static enum Types {
         EMPTY, WALL, START, END, VISITED, SOLUTION
     }

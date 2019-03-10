@@ -25,7 +25,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     private int lastX, lastY;
     Grid grid;
     Menu menu;
-    GUICom cl;
+    IGUI cl;
 
     public GUI(ComLayer cl) {
         this.setStart = false;
@@ -182,10 +182,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     if (running) {
                         System.out.println("start");
                         cl.setGrid(grid);
-                        cl.setStart(true);
+                        cl.setStarted(true);
                     } else {
                         System.out.println("stop");
-                        cl.setStopAlgo(true);
+                        cl.stopAlgorithm(true);
                     }
 
                     break;

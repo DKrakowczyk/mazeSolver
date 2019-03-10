@@ -9,45 +9,45 @@ import mazesolver.grid.Grid;
 
 /**
  *
- * @author Marcin
+ * @author DKrakowczyk & M. Kucharskov
  */
-public class ComLayer implements WorkerCom, GUICom {
+public class ComLayer implements IWorker, IGUI {
 
     Grid grid;
-    int algo;
-    boolean start;
-    boolean stopAlgo;
+    int algorithm;
+    boolean started;
+    boolean stopAlgorithm;
     boolean stopWorker;
     boolean finished;
 
     @Override
-    public synchronized boolean isStopWorker() {
+    public synchronized boolean workerStopped() {
         return stopWorker;
     }
 
     @Override
-    public synchronized void setStopWorker(boolean stopWorker) {
+    public synchronized void stopWorker(boolean stopWorker) {
         this.stopWorker = stopWorker;
-        if (stopWorker) stopAlgo = true;
-//============== 
+        if (stopWorker) stopAlgorithm = true;
+
         notifyAll();
     }
 
     @Override
     public synchronized void start() throws InterruptedException {
-//============== TO JEST WAZNE
-        while (!(start || stopWorker)) {
+
+        while (!(started || stopWorker)) {
             this.wait();
         }
-//============== 
-        start = false;
+
+        started = false;
         finished = false;
-        stopAlgo = false;
+        stopAlgorithm = false;
     }
    
     @Override
-    public synchronized boolean isStart() {
-        return start;
+    public synchronized boolean isStarted() {
+        return started;
     }
 
     @Override
@@ -61,30 +61,30 @@ public class ComLayer implements WorkerCom, GUICom {
     }
 
     @Override
-    public synchronized void setStart(boolean start) {
-        this.start = start;
-//============== 
+    public synchronized void setStarted(boolean started) {
+        this.started = started;
+
         notifyAll();
     }
 
     @Override
     public synchronized boolean isStopAlgo() {
-        return stopAlgo;
+        return stopAlgorithm;
     }
 
     @Override
-    public void setStopAlgo(boolean stopAlgo) {
-        this.stopAlgo = stopAlgo;
+    public void stopAlgorithm(boolean stopAlgorithm) {
+        this.stopAlgorithm = stopAlgorithm;
     }
     
        @Override
-    public synchronized int getAlgo() {
-        return algo;
+    public synchronized int getAlgorithm() {
+        return algorithm;
     }
 
     @Override
-    public synchronized void setAlgo(int algo) {
-        this.algo = algo;
+    public synchronized void setAlgorithm(int algorithm) {
+        this.algorithm = algorithm;
     }
 
     @Override
@@ -96,5 +96,4 @@ public class ComLayer implements WorkerCom, GUICom {
     public synchronized Grid getGrid() {
         return grid;
     }
-
 }

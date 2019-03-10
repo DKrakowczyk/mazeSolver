@@ -16,9 +16,9 @@ import mazesolver.solver.Algo;
  */
 public class Worker extends Thread {
 
-    WorkerCom worker;
+    IWorker worker;
 
-    public Worker(WorkerCom worker) {
+    public Worker(IWorker worker) {
         this.worker = worker;
     }
 
@@ -27,7 +27,7 @@ public class Worker extends Thread {
         try {
             do {
                 worker.start(); // Uruchomienie workera
-                if (worker.isStopWorker()) {
+                if (worker.workerStopped()) {
                     break;
                 }
                 Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
@@ -36,7 +36,7 @@ public class Worker extends Thread {
                 alg.setGrid(grid);
                 alg.start();
                 worker.finished(); // Zakonczenie dzialania algorytmu
-            } while (!worker.isStopWorker());
+            } while (!worker.workerStopped());
         } catch (InterruptedException ex) {
             Logger.getLogger(Worker.class.getName()).log(Level.SEVERE, null, ex);
         }
