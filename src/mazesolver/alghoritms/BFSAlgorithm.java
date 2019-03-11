@@ -54,9 +54,9 @@ public class BFSAlgorithm implements IAlgorithm {
                 }
                 if (end.equals(chlid)) {
                     solutionFound = true;
-                    checkForAlerts(solutionFound, grid);
+                    Utils.checkForAlerts(solutionFound, grid);
                     solutionMap.put(chlid, state);
-                    showSolution(solutionMap, grid);
+                    Utils.showSolution(solutionMap, grid);
                     worker.stopRunning();
                     return;
                 }
@@ -71,33 +71,7 @@ public class BFSAlgorithm implements IAlgorithm {
                 }
             }
         }
-        checkForAlerts(solutionFound, grid);
+        Utils.checkForAlerts(solutionFound, grid);
         return;
-    }
-
-    @Override
-    public void showSolution(Map<Node, Node> solutionMap, Grid grid) {
-        Node state = grid.getEnd();
-        while (state != grid.getStart()) {
-            if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Types.SOLUTION);
-            }
-            Node rodzic = solutionMap.get(state);
-            state = rodzic;
-            grid.repaint();
-        }
-    }
-
-    private void checkForAlerts(boolean solved, Grid grid) {
-        if (solved) {
-            Menu.alertMessage = 3;
-            Menu.showAlert = true;
-            grid.repaint();
-        } else {
-            Menu.alertMessage = 2;
-            Menu.showAlert = true;
-            grid.repaint();
-            GUI.running = false;
-        }
     }
 }

@@ -19,7 +19,7 @@ import java.util.Set;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
-import mazesolver.grid.Pair;
+
 import mazesolver.gui.GUI;
 import mazesolver.gui.Menu;
 import mazesolver.threads.IConnectWorker;
@@ -32,6 +32,7 @@ public class AStarAlgorithm implements IAlgorithm {
 
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
+        boolean solutionFound = false;
         Node startNode = grid.getStart();
         Node endNode = grid.getEnd();
         grid.clear();
@@ -61,7 +62,9 @@ public class AStarAlgorithm implements IAlgorithm {
             if (!visited.contains(current)) {
                 visited.add(current);
                 if (endNode.equals(current)) {
-                    showSolution(solutionMap, grid);
+                    solutionFound = true;
+                    Utils.checkForAlerts(solutionFound, grid);
+                    Utils.showSolution(solutionMap, grid);
                     worker.stopRunning();
                     return;
                 }
@@ -90,24 +93,41 @@ public class AStarAlgorithm implements IAlgorithm {
                 }
             }
         }
-
+        Utils.checkForAlerts(solutionFound, grid);
+        GUI.running = false;
+        return;
     }
-
-    @Override
-    public void showSolution(Map<Node, Node> solutionMap, Grid grid) {
-        Node state = grid.getEnd();
-        while (state != grid.getStart()) {
-            if (state != grid.getEnd() && state != grid.getStart()) {
-                state.setType(Node.Types.SOLUTION);
-            }
-            Node rodzic = solutionMap.get(state);
-            state = rodzic;
-            grid.repaint();
-        }
-    }
-
+    
     private double distance(Node a, Node b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
 
+}
+
+class Pair implements Comparable {
+
+    Node node;
+    double totalDistance;
+    double predictedDistance;
+
+    public Pair(Node n, double totalDistance, double predictedDistance) {
+        this.node = n;
+        this.totalDistance = totalDistance;
+        this.predictedDistance = predictedDistance;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (this.predictedDistance > ((Pair) o).predictedDistance) {
+            return 1;
+        } else if (this.predictedDistance < ((Pair) o).predictedDistance) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
+    public Node getNode() {
+        return node;
+    }
 }
