@@ -40,7 +40,6 @@ public class BFSAlgorithm implements IAlgorithm {
         Map<Node, Node> solutionMap = new LinkedHashMap<>();
 
         queue.add(start);
-
         solutionMap.put(start, null);
 
         while (queue.size() > 0) {

@@ -27,8 +27,10 @@ public class AlgorithmFactory {
                 return new BFSAlgorithm();
             case 2:
                 return new DFSAlgorithm();
-            default:
+            case 3:
                 return new AStarAlgorithm();
+            default:
+                return null;
         }
     }
 }

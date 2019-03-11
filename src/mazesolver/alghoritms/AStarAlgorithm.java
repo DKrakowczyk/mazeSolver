@@ -20,6 +20,7 @@ import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
 import mazesolver.grid.Pair;
+import mazesolver.gui.GUI;
 import mazesolver.gui.Menu;
 import mazesolver.threads.IConnectWorker;
 
@@ -31,20 +32,20 @@ public class AStarAlgorithm implements IAlgorithm {
 
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
-        
         Node startNode = grid.getStart();
         Node endNode = grid.getEnd();
+        grid.clear();
 
-        HashMap<Node,Node> parentMap = new HashMap<Node,Node>();
-        HashSet<Node> visited = new HashSet<Node>();
+        HashMap<Node, Node> parentMap = new HashMap<>();
+        HashSet<Node> visited = new HashSet<>();
         Map<Node, Double> distances = new HashMap<>();
-        
-        for(Node n : grid.getNodes()){
-            distances.put(n,Double.POSITIVE_INFINITY);
+
+        for (Node n : grid.getNodes()) {
+            distances.put(n, Double.POSITIVE_INFINITY);
         }
- 
+
         Queue<Pair> priorityQueue = new PriorityQueue<>();
- 
+
         distances.put(startNode, new Double(0));
         priorityQueue.add(new Pair(startNode, 0, 0));
         Node current = null;
@@ -52,30 +53,34 @@ public class AStarAlgorithm implements IAlgorithm {
 
         solutionMap.put(startNode, null);
         while (!priorityQueue.isEmpty()) {
+            if (!GUI.running) {
+                return;
+            }
+
             current = priorityQueue.poll().getNode();
-            
-            if (!visited.contains(current) ){
+            if (!visited.contains(current)) {
                 visited.add(current);
-                if (endNode.equals(current)){
-                    solutionMap.put(endNode, current);
+                if (endNode.equals(current)) {
                     showSolution(solutionMap, grid);
                     worker.stopRunning();
                     return;
                 }
- 
+
                 List<Node> neighbors = grid.getNeighbors(current.getX(), current.getY());
-                
+
                 for (Node neighbor : neighbors) {
-                    if (!visited.contains(neighbor) ){  
-                        neighbor.setType(Types.VISITED);
-                        Thread.sleep(Menu.getDelay());
-                        grid.repaint();
-                        
+                    if (!visited.contains(neighbor)) {
+                        if (neighbor != grid.getEnd() && neighbor != grid.getStart()) {
+                            neighbor.setType(Types.VISITED);
+                            Thread.sleep(Menu.getDelay());
+                            grid.repaint();
+                        }
+
                         double predictedDistance = distance(neighbor, endNode);
                         double neighborDistance = distance(current, neighbor);
-                        double totalDistance = distance(current,startNode) + neighborDistance + predictedDistance;
- 
-                        if(totalDistance < distances.get(neighbor) ){
+                        double totalDistance = distance(current, startNode) + neighborDistance + predictedDistance;
+
+                        if (totalDistance < distances.get(neighbor)) {
                             distances.put(neighbor, totalDistance);
                             parentMap.put(neighbor, current);
                             priorityQueue.add(new Pair(neighbor, totalDistance, predictedDistance));
@@ -85,8 +90,9 @@ public class AStarAlgorithm implements IAlgorithm {
                 }
             }
         }
-       
+
     }
+
     @Override
     public void showSolution(Map<Node, Node> solutionMap, Grid grid) {
         Node state = grid.getEnd();
@@ -99,10 +105,9 @@ public class AStarAlgorithm implements IAlgorithm {
             grid.repaint();
         }
     }
-      
-  
-  private double distance(Node a, Node b) {
+
+    private double distance(Node a, Node b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }
-   
+
 }
