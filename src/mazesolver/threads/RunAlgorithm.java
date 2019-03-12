@@ -10,7 +10,7 @@ import mazesolver.alghoritms.AlgorithmFactory;
 
 /**
  *
- * @author Marcin
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class RunAlgorithm {
 

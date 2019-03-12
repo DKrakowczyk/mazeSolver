@@ -24,6 +24,6 @@ public interface IConnectUI {
     void setStarted(boolean start);
 
     void stopWorker(boolean stopWorker);
-    
+
     boolean isFinished();
 }

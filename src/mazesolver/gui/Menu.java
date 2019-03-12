@@ -21,12 +21,12 @@ public class Menu {
     boolean hidden;
 
     public Menu(int x, int y) {
+        Menu.showAlert = false;
+        Menu.speedMultipler = 100;
+        Menu.alertMessage = 0;
         this.x = x;
         this.y = y;
         this.hidden = true;
-        this.speedMultipler = 100;
-        this.alertMessage = 0;
-        this.showAlert = false;
     }
 
     public static int getDelay() {
@@ -34,7 +34,6 @@ public class Menu {
     }
 
     public void draw(Graphics g) {
-
         drawAlertBox(g);
 
         if (hidden) {
@@ -85,7 +84,7 @@ public class Menu {
 
             g.setColor(Color.WHITE);
             if (AlgorithmFactory.getID() == 1) {
-                g.setColor(new Color(168, 109, 47));
+                g.setColor(new Color(42, 170, 42));
             }
             g.drawString("[1]  BFS alghoritm", 765, 490);
 
@@ -97,7 +96,7 @@ public class Menu {
 
             g.setColor(Color.WHITE);
             if (AlgorithmFactory.getID() == 3) {
-                g.setColor(new Color(106, 162, 244));
+                g.setColor(new Color(42, 170, 42));
             }
             g.drawString("[3]  A* alghoritm", 765, 550);
         }
@@ -110,12 +109,18 @@ public class Menu {
             g.fillRect(250, 0, 400, 50);
             g.setFont(new Font("Arial", Font.PLAIN, 18));
             g.setColor(Color.WHITE);
-            if (alertMessage == 1) {
-                g.drawString("Please select start and end node", 320, 30);
-            } else if (alertMessage == 2) {
-                g.drawString("Solution could not be found", 340, 30);
-            } else if (alertMessage == 3) {
-                g.drawString("Solution has been found", 350, 30);
+            switch (alertMessage) {
+                case 1:
+                    g.drawString("Please select start and end node", 320, 30);
+                    break;
+                case 2:
+                    g.drawString("Solution could not be found", 340, 30);
+                    break;
+                case 3:
+                    g.drawString("Solution has been found", 350, 30);
+                    break;
+                default:
+                    break;
             }
         }
     }

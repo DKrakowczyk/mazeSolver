@@ -22,7 +22,6 @@ import mazesolver.threads.IConnectUI;
 public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     static boolean setStart, setEnd, mouseInUse;
-
     public static boolean running;
     private int lastX, lastY;
     Grid grid;
@@ -30,9 +29,10 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
     IConnectUI connetionLayer;
 
     public GUI(BackgroundWorker cl) {
-        this.setStart = false;
-        this.setEnd = false;
-        mouseInUse = false;
+        GUI.setStart = false;
+        GUI.setEnd = false;
+        GUI.mouseInUse = false;
+        GUI.running = false;
         this.lastX = -1;
         this.lastY = -1;
         this.grid = new Grid(this);
@@ -54,7 +54,6 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseClicked(MouseEvent me) {
-
         if (!running) {
             int x = (me.getX()) / MazeSolver.nodeSize;
             int y = (me.getY()) / MazeSolver.nodeSize;
@@ -194,9 +193,7 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                         Menu.showAlert = true;
                         repaint();
                     }
-
                     break;
-
                 // Solver choose
                 case KeyEvent.VK_1:
                     if (!running) {
@@ -251,7 +248,5 @@ public class GUI extends JPanel implements MouseListener, MouseMotionListener {
                     break;
             }
         }
-
     }
-
 }

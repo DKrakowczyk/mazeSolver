@@ -5,28 +5,23 @@
  */
 package mazesolver.alghoritms;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Set;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
-
 import mazesolver.gui.GUI;
 import mazesolver.gui.Menu;
 import mazesolver.threads.IConnectWorker;
 
 /**
  *
- * @author Dawid
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class AStarAlgorithm implements IAlgorithm {
 
@@ -36,23 +31,21 @@ public class AStarAlgorithm implements IAlgorithm {
         Node startNode = grid.getStart();
         Node endNode = grid.getEnd();
         grid.clear();
-
+        
         HashMap<Node, Node> parentMap = new HashMap<>();
         HashSet<Node> visited = new HashSet<>();
         Map<Node, Double> distances = new HashMap<>();
-
+        Queue<Pair> priorityQueue = new PriorityQueue<>();
         for (Node n : grid.getNodes()) {
             distances.put(n, Double.POSITIVE_INFINITY);
         }
-
-        Queue<Pair> priorityQueue = new PriorityQueue<>();
 
         distances.put(startNode, new Double(0));
         priorityQueue.add(new Pair(startNode, 0, 0));
         Node current = null;
         Map<Node, Node> solutionMap = new LinkedHashMap<>();
-
         solutionMap.put(startNode, null);
+        
         while (!priorityQueue.isEmpty()) {
             if (!GUI.running) {
                 return;
@@ -70,7 +63,6 @@ public class AStarAlgorithm implements IAlgorithm {
                 }
 
                 List<Node> neighbors = grid.getNeighbors(current.getX(), current.getY());
-
                 for (Node neighbor : neighbors) {
                     if (!visited.contains(neighbor)) {
                         if (neighbor != grid.getEnd() && neighbor != grid.getStart()) {
@@ -95,9 +87,8 @@ public class AStarAlgorithm implements IAlgorithm {
         }
         Utils.checkForAlerts(solutionFound, grid);
         GUI.running = false;
-        return;
     }
-    
+
     private double distance(Node a, Node b) {
         return Math.sqrt(Math.pow(a.getX() - b.getX(), 2) + Math.pow(a.getY() - b.getY(), 2));
     }

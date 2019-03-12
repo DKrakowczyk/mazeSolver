@@ -13,7 +13,7 @@ import mazesolver.gui.Menu;
 
 /**
  *
- * @author Dawid
+ * @author DKrakowczyk & M. Kucharskov
  */
 public class Utils {
 
@@ -23,8 +23,8 @@ public class Utils {
             if (state != grid.getEnd() && state != grid.getStart()) {
                 state.setType(Node.Types.SOLUTION);
             }
-            Node rodzic = solutionMap.get(state);
-            state = rodzic;
+            Node parent = solutionMap.get(state);
+            state = parent;
             grid.repaint();
         }
     }
@@ -34,12 +34,11 @@ public class Utils {
             Menu.alertMessage = 3;
             Menu.showAlert = true;
             grid.repaint();
-
         } else {
             Menu.alertMessage = 2;
             Menu.showAlert = true;
-            grid.repaint();
             GUI.running = false;
+            grid.repaint();
         }
     }
 }

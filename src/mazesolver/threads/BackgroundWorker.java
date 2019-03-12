@@ -29,7 +29,9 @@ public class BackgroundWorker implements IConnectWorker, IConnectUI {
     @Override
     public synchronized void stopWorker(boolean stopWorker) {
         this.workerStopped = stopWorker;
-        if (stopWorker) stopAlgorithm = true;
+        if (stopWorker) {
+            stopAlgorithm = true;
+        }
 
         notifyAll();
     }
@@ -45,7 +47,7 @@ public class BackgroundWorker implements IConnectWorker, IConnectUI {
         finished = false;
         stopAlgorithm = false;
     }
-   
+
     @Override
     public synchronized boolean isStarted() {
         return started;
@@ -77,8 +79,8 @@ public class BackgroundWorker implements IConnectWorker, IConnectUI {
     public void stopAlgorithm(boolean stopAlgorithm) {
         this.stopAlgorithm = stopAlgorithm;
     }
-    
-       @Override
+
+    @Override
     public synchronized int getAlgorithm() {
         return algorithm;
     }

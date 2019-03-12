@@ -20,18 +20,12 @@ public class DFSAlgorithm implements IAlgorithm {
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
         boolean solutionFound = false;
-        grid.clear();
         Node start = grid.getStart();
         Node end = grid.getEnd();
-
-        if (start == null || end == null) {
-            worker.stopRunning();
-            return;
-        }
+        grid.clear();
 
         Stack<Node> stack = new Stack<>();
         Map<Node, Node> solutionMap = new LinkedHashMap<>();
-
         stack.add(start);
         solutionMap.put(start, null);
 
@@ -39,7 +33,8 @@ public class DFSAlgorithm implements IAlgorithm {
             if (!GUI.running) {
                 return;
             }
-            Node state = stack.peek(); //Pobierz element
+
+            Node state = stack.peek();
             stack.pop();
 
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
@@ -52,6 +47,7 @@ public class DFSAlgorithm implements IAlgorithm {
                     worker.stopRunning();
                     return;
                 }
+
                 if (!solutionMap.containsKey(child)) {
                     stack.add(child);
                     solutionMap.put(child, state);
@@ -65,7 +61,5 @@ public class DFSAlgorithm implements IAlgorithm {
         }
         Utils.checkForAlerts(solutionFound, grid);
         GUI.running = false;
-        return;
     }
-
 }

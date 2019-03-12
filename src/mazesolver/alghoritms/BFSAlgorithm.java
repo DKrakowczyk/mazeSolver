@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import mazesolver.MazeSolver;
 import mazesolver.grid.Grid;
 import mazesolver.grid.Node;
 import mazesolver.grid.Node.Types;
@@ -27,18 +26,12 @@ public class BFSAlgorithm implements IAlgorithm {
     @Override
     public void solve(IConnectWorker worker, Grid grid) throws InterruptedException {
         boolean solutionFound = false;
-        grid.clear();
         Node start = grid.getStart();
         Node end = grid.getEnd();
-
-        if (start == null || end == null) {
-            worker.stopRunning();
-            return;
-        }
-
+        grid.clear();
+        
         Queue<Node> queue = new LinkedList<>();
         Map<Node, Node> solutionMap = new LinkedHashMap<>();
-
         queue.add(start);
         solutionMap.put(start, null);
 
@@ -46,12 +39,14 @@ public class BFSAlgorithm implements IAlgorithm {
             if (!GUI.running) {
                 return;
             }
+            
             Node state = queue.poll();
             List<Node> childs = grid.getNeighbors(state.getX(), state.getY());
             for (Node chlid : childs) {
                 if (worker.workerStopped()) {
                     return;
                 }
+                
                 if (end.equals(chlid)) {
                     solutionFound = true;
                     Utils.checkForAlerts(solutionFound, grid);
@@ -60,6 +55,7 @@ public class BFSAlgorithm implements IAlgorithm {
                     worker.stopRunning();
                     return;
                 }
+                
                 if (!solutionMap.containsKey(chlid)) {
                     queue.add(chlid);
                     solutionMap.put(chlid, state);
@@ -72,6 +68,5 @@ public class BFSAlgorithm implements IAlgorithm {
             }
         }
         Utils.checkForAlerts(solutionFound, grid);
-        return;
     }
 }

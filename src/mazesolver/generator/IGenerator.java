@@ -10,6 +10,7 @@ package mazesolver.generator;
  * @author DKrakowczyk & M. Kucharskov
  */
 public interface IGenerator {
+
     // Method which generate a maze in grid
     public void generate();
 }

@@ -5,9 +5,7 @@
  */
 package mazesolver.alghoritms;
 
-import java.util.Map;
 import mazesolver.grid.Grid;
-import mazesolver.grid.Node;
 import mazesolver.threads.IConnectWorker;
 
 /**

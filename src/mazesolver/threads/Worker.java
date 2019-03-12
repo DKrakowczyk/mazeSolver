@@ -23,16 +23,16 @@ public class Worker extends Thread {
     public void run() {
         try {
             do {
-                worker.start(); // Uruchomienie workera
+                worker.start();
                 if (worker.workerStopped()) {
                     break;
                 }
-                Grid grid = worker.getGrid(); // Pobranie danych do algorytmu
+                Grid grid = worker.getGrid();
                 RunAlgorithm algorithm = new RunAlgorithm();
                 algorithm.setWorker(worker);
                 algorithm.setGrid(grid);
                 algorithm.start();
-                worker.finished(); // Zakonczenie dzialania algorytmu
+                worker.finished();
             } while (!worker.workerStopped());
         } catch (InterruptedException ex) {
         }

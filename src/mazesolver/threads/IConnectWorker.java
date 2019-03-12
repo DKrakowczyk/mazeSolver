@@ -24,6 +24,6 @@ public interface IConnectWorker {
     boolean workerStopped();
 
     void start() throws InterruptedException;
-    
+
     void stopRunning();
-}   
+}
